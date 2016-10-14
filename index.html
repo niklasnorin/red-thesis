@@ -2,11 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>any tag - document</title>
-  <script src="https://obedm503.github.io/bootmark/dist/bootmark.bundle.min.js"></script>
+  <title>Thesis</title>
+  <script src="bootmark.bundle.min.js"></script>
 </head>
 <body>
-	<bootmark fetch="title.md" html="{credit: false, toc: false}"></bootmark>
-	<bootmark fetch="abstract.md" html="{credit: false, toc: false}"></bootmark>
+	<bootmark 
+    fetch="[
+      'title.md',
+      'abstract.md'
+    ]" 
+    join="<br />"
+    html="{
+      credit: false,
+      toc: true,
+      theme: 'paper',
+      prettifyTheme: 'tranquil-heart',
+    }">
+  </bootmark>
 </body>
 </html>
