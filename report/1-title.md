@@ -1,2 +1,2 @@
-An architecture for remote embedded software development
-========================================================
+Emulating hardware peripherals in Linux
+=======================================
