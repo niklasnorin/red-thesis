@@ -1,2 +1,1 @@
-Emulating hardware peripherals in Linux
-=======================================
+See ../common/title.md

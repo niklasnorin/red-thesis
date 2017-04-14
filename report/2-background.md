@@ -1,1 +1,1 @@
-See ../common/background
+See ../common/background.md

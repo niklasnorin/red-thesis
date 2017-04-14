@@ -1,5 +1,5 @@
 Background
---------
+==========
 
 The traditional definition of a personal work place as a desk in a cubical is slowly, but surely, on its way to be a thing of the past. The amount of people working remotely, both self-employed and not, has literally exploded in the wake of the dramatic increase of widely available, often free, internet connectivity. 3.7 Million people in the U.S. is already working remotely at least half of the time (US Census Bureau) and working from home among non-self-employed is up more than 100% since 2005. When given the choice, as many as 80-90% of the US workforce said that they would choose to do so if they could.
 
