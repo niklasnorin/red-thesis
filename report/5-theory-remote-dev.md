@@ -1,9 +1,23 @@
-Connecting and debugging hardware remotely
-==========================================
+Remote embedded software development
+====================================
+
+Embedded software development differs from software development targeting native desktop or cloud application in a few ways. Embedded software can typically not be executed on the same computer that the code is developed on, but has to be run on a specific *target*. A *target* often refers to a specific architecture and sometimes even to a specific PCB.
+
+In many cases it is not possible to run the embedded software on the development computer due to differences in processor architecture. Most modern computers have x86 or amd64 based processors, while most modern embedded systems have ARM based processors. Compiling can still be done on the developers PC using cross-compilers, but running the resulting executable is often done on target. There are emulators that can execute non-native code, such as running ARM programs on a x86 system, but it's very rare that these emulators supports emulating all attached hardware peripherals.
 
 Local Development - Local Target
 --------------------------------
-Most common use case is that the developer has a local development environment already and connects to a development kit locally. This would be the reference case.
+The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables.
+
+Compilation 
+
+Flashing target
+
+Debugging
+
+Some common connections are USB, RS232, JTAG and Ethernet. In addition to this, many development and testing scenarios also requires attached instrumentation such as logic analyzers and oscilloscopes.
+
+An advantage of having the hardware locally is that it's possible to access any switches on the board, see LED:s and displays and to disconnect and connect cables to the target freely.
 
 Local Development - Remote Target
 ---------------------------------
@@ -39,6 +53,10 @@ Or connect hardware to the local PC, which connects to the Cloud tools
 Potential to expose GPIO’s in a standardize manner 
 Current status
 Not any available for embedded development that I know of - more research needed
+
+Table of comparison
+-------------------
+**Create an easy to overview table of pros and cons** 
 
 General comments
 ----------------
