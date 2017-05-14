@@ -1,9 +1,45 @@
-Remote embedded software development
-====================================
+Native software development
+=============================
 
-Embedded software development differs from software development targeting native desktop or cloud application in a few ways. Embedded software can typically not be executed on the same computer that the code is developed on, but has to be run on a specific *target*. A *target* often refers to a specific architecture and sometimes even to a specific PCB.
+Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
 
-In many cases it is not possible to run the embedded software on the development computer due to differences in processor architecture. Most modern computers have x86 or amd64 based processors, while most modern embedded systems have ARM based processors. Compiling can still be done on the developers PC using cross-compilers, but running the resulting executable is often done on target. There are emulators that can execute non-native code, such as running ARM programs on a x86 system, but it's very rare that these emulators supports emulating all attached hardware peripherals.
+No matter what the software a developer writes, the workflow is usually the same:
+
+1. Write code
+2. Compile code
+3. Test code by executing it
+4. Debug any problems
+5. Repeat
+
+Code is targeting the same type of environment as the development computer and is written, compiled, run and debugged on the development computer.
+
+Embedded software development
+=============================
+
+From a bird-eye perspective, embedded software development night not seem to differ from native application much.
+
+The workflow is similar:
+
+1. Write code
+2. *Cross-compile* code
+3. Move code to *target*
+4. Test code by executing it
+5. Debug any problems
+6. Repeat
+
+Embedded software development does differs from native software development in a number of ways however. For a start, the code is typically not intended to be run in the same environment that the developer use to write the code. When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. 
+
+Working with another target than the local computer has far reaching implications on the development workflow. Compilation can often no longer be done for the local processor architecture with standard compilers. Most modern laptops and desktops runs on x86 or amd64 processor architectures while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler, or cross compiler, is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer.
+
+Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection is often used to control the execution of the software on the target.
+
+Debugging embedded software is generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, The GNU Project Debugger, for example makes it possible to set up a remote debugging server on the target to which GDB connects. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
+
+Development environment
+=======================
+
+
+**IDEA** The quality of the link to the target can greatly affect the efficiency of the software development as code iteration cycles will be higher if a SD card is needed for every update rather than a network link.
 
 Local Development - Local Target
 --------------------------------
