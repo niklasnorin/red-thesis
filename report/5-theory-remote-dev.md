@@ -1,9 +1,9 @@
-Native software development
-=============================
+Native application software development
+=======================================
 
 Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
 
-No matter what the software a developer writes, the workflow is usually the same:
+No matter what the software a developer writes, the workflow for a compiled language is usually the same:
 
 1. Write code
 2. Compile code
@@ -11,12 +11,12 @@ No matter what the software a developer writes, the workflow is usually the same
 4. Debug any problems
 5. Repeat
 
-Code is targeting the same type of environment as the development computer and is written, compiled, run and debugged on the development computer.
+The program is targeting a similar type of environment as the software developers computer and is written, compiled, run and debugged on the developers computer.
 
 Embedded software development
 =============================
 
-From a bird-eye perspective, embedded software development night not seem to differ from native application much.
+From a bird-eye perspective, embedded software development might not seem to differ much from native application software development
 
 The workflow is similar:
 
@@ -27,57 +27,59 @@ The workflow is similar:
 5. Debug any problems
 6. Repeat
 
-Embedded software development does differs from native software development in a number of ways however. For a start, the code is typically not intended to be run in the same environment that the developer use to write the code. When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. 
+Most modern laptops and desktops runs on x86 or amd64 processor architectures while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler, or cross compiler, is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer.
 
-Working with another target than the local computer has far reaching implications on the development workflow. Compilation can often no longer be done for the local processor architecture with standard compilers. Most modern laptops and desktops runs on x86 or amd64 processor architectures while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler, or cross compiler, is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer.
+When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection is often used to control the execution of the software on the target. Working with another target than the local computer has far reaching implications on the development workflow.
 
-Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection is often used to control the execution of the software on the target.
+Debugging embedded software is also generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, The GNU Project Debugger, for example makes it possible to set up a remote debugging server on the target to which GDB connects. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
 
-Debugging embedded software is generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, The GNU Project Debugger, for example makes it possible to set up a remote debugging server on the target to which GDB connects. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
+Remote software development
+===========================
+When working with native application software the developer is bringing the targeted platform for his application with him wherever he takes his computer. No need to worry about additional hardware, instruments or lab equipment. With a laptop and an internet connection, it is possible to efficiently work on almost any native application from anywhere.
 
-Development environment
-=======================
+For embedded developers it is often a bit harder. If you are lucky, you only need a single development board with a single USB-cable. In this simple case, you only need a padded ESD bag and you're good to go. In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
 
-
-**IDEA** The quality of the link to the target can greatly affect the efficiency of the software development as code iteration cycles will be higher if a SD card is needed for every update rather than a network link.
+Remote embedded software development
+====================================
+There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment. 
 
 Local Development - Local Target
 --------------------------------
-The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables.
+The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup. 
 
-Compilation 
+Most embedded targets, whether they are development kits or custom PCB's, can be connected to the developers computer or local network directly. Some common connections are USB or JTAG for connecting directly to a target, or RS232 and Ethernet to provide a serial console, SSH connection or general internet connectivity.
 
-Flashing target
+In addition to this, many development and testing scenarios also requires attached instrumentation such as logic analyzers or oscilloscopes. These are crucial tools in debugging complex problems for embedded systems. Sometimes being able to listen in on the digital inputs and outputs of an embedded system can offer far clearer insights than any application log can do.
 
-Debugging
+The main development workflow will be as described in *Embedded software development* above. Cross-compiling is done on the developers computer, the resulting binaries are transferred locally to the target and the application executed, debugged and observed by the developer in real-time.
 
-Some common connections are USB, RS232, JTAG and Ethernet. In addition to this, many development and testing scenarios also requires attached instrumentation such as logic analyzers and oscilloscopes.
+When it comes to testing the application on the target on a system level, the developer can in many cases simply lean over to press a button and observe if he sees the appropriate behaviour.
 
-An advantage of having the hardware locally is that it's possible to access any switches on the board, see LED:s and displays and to disconnect and connect cables to the target freely.
+This is a manual and iterative approach but for many embedded software development scenarios, this is hands down the most common and efficient one.
 
 Local Development - Remote Target
 ---------------------------------
-Remotely connect to, and debug, target
-SSH
-Remote USB-over-Internet
-Remote connection to debugger (GDB, Delve etc.)
-Current status:
-There are available solutions
-Relies on real hardware
-Needs VPN or port forwarding
-No way to stimulate input or see outputs remotely
+Many modern development environments use Internet Protocol related technology to flash and debug embedded targets. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network.
 
-Remote Development Environment
-------------------------------
-Remote Desktop IDE
-Use Remote Desktop to connect to a Local IDE environment remotely
-Shares all aspects with the Local IDE
-Discussion:
-Several Remote Desktop technologies exist with good screen quality and low latency
-Simple to set up
-Needs real hardware
-Most solutions means 1:1 mapping between developer and remote machine
-No way to stimulate input or see outputs remotely
+This means that the local development environment can be the same, with the same compiler, debugging tools etc. being used as with a local target.
+
+The most convenient part of working with a remote target is that even if it requires a complex power and network connectivity setup, it does not need to be carried along. It can be set up at the remote location, and then accessed from anywhere.
+
+Having a remote target is not very efficient when it comes to instrumentation. While some high-end lab instruments might be remotely accessible, most are not. Also, observing or stimulating the target directly is generally not possible. This means that while the developer has access to programming and running code on the target, it might not be easy to debug or test the complete system.
+
+Another element of embedded software development not to be neglected is that to reset the target to a known state, it's often necessary to power cycle the system or disconnected and reconnect a cable. While this is very easy when the system is locally available, this might not be possible when working with a remote target.
+
+Remote Desktop
+--------------
+A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
+
+One potential major upside is that the client computer does not need to have any other software installed than the a remote desktop client software. All software will have to be installed on the server computer. In the case that the server computer is actually the developers stationary work station, this means that he can work with the exact same computer setup locally and remotely.
+
+Some of the other upsides are the same as when working with the remote target, as explained previously - the target is simply set up towards the server as if the server was a local development environment. One difference compared to the remote target workflow is that even if the target hardware does not support working remotely natively (e.g. over Ethernet), it can simply be connected to a server locally, and then still be worked with remotely by the client.
+
+One downsides of this solution is that it only works if you have a stable and relatively high-thruput and low-latency internet connection to work over. Another major downside is that you have to have two computers, one that's constantly connected to the target, and one client to work remotely from. For many use-cases and remote desktop client, the server can also only serve one client at a time, so it will scale poorly.
+
+With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
 Cloud Development Environment
 -----------------------------
@@ -93,6 +95,11 @@ Not any available for embedded development that I know of - more research needed
 Table of comparison
 -------------------
 **Create an easy to overview table of pros and cons** 
+Points:
+- Local cross-compilation
+- Local hardware
+- Instrumentation possible
+- Possible to automate
 
 General comments
 ----------------
