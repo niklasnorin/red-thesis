@@ -8,9 +8,9 @@ The plan is to start with some planning and structural work before diving into r
 |----------------|----------------|----------------|-----------------------------------|
 | April 10th     | April 16th     | 1              | Plan & Planning Report            |
 | April 17th     | May 14th       | 4              | Research and write Theory         |
-| May 15th       | May 28th       | 2              | Design Architecture               |
+| May 15th       | June 18th      | 5              | Design Architecture               |
 |                |                |                | **Halfway Report**                |
-| May 29th       | July 23rd      | 8              | Design and Implement Architecture |
+| June 19th      | July 23rd      | 5              | Design and Implement Architecture |
 |                |                |                | **Report Draft 1**                |
 | July 24th      | August 20th    | 4              | Result & Discussion               |
 |                |                |                | **Report Draft 2**                |
