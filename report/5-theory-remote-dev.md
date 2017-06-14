@@ -83,26 +83,13 @@ With regards to instrumentation and local access for testing etc. this method ha
 
 Cloud Development Environment
 -----------------------------
-Cloud IDE
-Use IDE that is hosted online
-Shares many aspects with the Local IDE
-Could imagine hosted environment with lots of connected hardware
-Or connect hardware to the local PC, which connects to the Cloud tools
-Potential to expose GPIO’s in a standardize manner 
-Current status
-Not any available for embedded development that I know of - more research needed
+Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available.
+
+Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.
+
+One major downside is that there is not a lot of widespread adopted browser support to communicate directly with hardware. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed.
+
 
 Table of comparison
 -------------------
-**Create an easy to overview table of pros and cons** 
-Points:
-- Local cross-compilation
-- Local hardware
-- Instrumentation possible
-- Possible to automate
-
-General comments
-----------------
-If kits are connected with specialized “shield”, they could potentially expose inputs and outputs to the internet in some way
-These shields would most likely need to be designed per each development kit
-Latency wise - code stimulating inputs/output would most likely need to execute on, or near, these “shields”
+_Consider creating a table for easy comparison of the above development environments._
