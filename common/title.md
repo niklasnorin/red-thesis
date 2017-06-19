@@ -3,7 +3,7 @@
 The Telecommuting Software Developer
 ====================================
 Embedded Linux Development Without Hardware
-----------------------------------------------------------
+-------------------------------------------
 <div style="height:10vh;"></div>
 ## Niklas Norin
 #### A Master Thesis at Electronic Design
