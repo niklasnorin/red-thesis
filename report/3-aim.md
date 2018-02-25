@@ -1,1 +1,0 @@
-See ../common/aim.md

@@ -1,48 +1,14 @@
-Software development
-====================
-
-### Native application software development
-Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
-
-No matter what the software a developer writes, the workflow for a compiled language is usually the same:
-
-1. Write code
-2. Compile code
-3. Test code by executing it
-4. Debug any problems
-5. Repeat
-
-The program is targeting a similar type of environment as the software developers computer and is written, compiled, run and debugged on the developers computer.
-
-### Embedded software development
-From a bird-eye perspective, embedded software development might not seem to differ much from native application software development
-
-The workflow is similar:
-
-1. Write code
-2. *Cross-compile* code
-3. Move code to *target*
-4. Test code by executing it
-5. Debug any problems
-6. Repeat
-
-Most modern laptops and desktops runs on x86 or amd64 processor architectures while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler, or cross compiler, is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer.
-
-When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection is often used to control the execution of the software on the target. Working with another target than the local computer has far reaching implications on the development workflow.
-
-Debugging embedded software is also generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, The GNU Project Debugger, for example makes it possible to set up a remote debugging server on the target to which GDB connects. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
-
-### Remote software development
+# 3. Remote Embedded Software Development
 When working with native application software the developer is bringing the targeted platform for his application with him wherever he takes his computer. No need to worry about additional hardware, instruments or lab equipment. With a laptop and an internet connection, it is possible to efficiently work on almost any native application from anywhere.
 
-For embedded developers it is often a bit harder. If you are lucky, you only need a single development board with a single USB-cable. In this simple case, you only need a padded ESD bag and you're good to go. In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
+For embedded developers it is often a bit harder. If you are lucky, you only need a single development board with a single USB-cable. In this simple case, you only need a padded ESD bag and you're good to go. 
 
-Remote embedded software development
-====================================
+In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
+
 There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment. 
 
-### Local Development - Local Target
-The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup. 
+## 3.1. Local Development - Local Target
+The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup.
 
 Most embedded targets, whether they are development kits or custom PCB's, can be connected to the developers computer or local network directly. Some common connections are USB or JTAG for connecting directly to a target, or RS232 and Ethernet to provide a serial console, SSH connection or general internet connectivity.
 
@@ -54,7 +20,7 @@ When it comes to testing the application on the target on a system level, the de
 
 This is a manual and iterative approach but for many embedded software development scenarios, this is hands down the most common and efficient one.
 
-### Local Development - Remote Target
+## 3.2. Local Development - Remote Target
 Many modern development environments use Internet Protocol related technology to flash and debug embedded targets. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network.
 
 This means that the local development environment can be the same, with the same compiler, debugging tools etc. being used as with a local target.
@@ -65,7 +31,7 @@ Having a remote target is not very efficient when it comes to instrumentation. W
 
 Another element of embedded software development not to be neglected is that to reset the target to a known state, it's often necessary to power cycle the system or disconnected and reconnect a cable. While this is very easy when the system is locally available, this might not be possible when working with a remote target.
 
-### Remote Desktop
+## 3.3. Remote Desktop
 A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
 
 One potential major upside is that the client computer does not need to have any other software installed than the a remote desktop client software. All software will have to be installed on the server computer. In the case that the server computer is actually the developers stationary work station, this means that he can work with the exact same computer setup locally and remotely.
@@ -76,13 +42,12 @@ One downsides of this solution is that it only works if you have a stable and re
 
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
-### Cloud Development Environment
+## 3.4. Cloud Development Environment
 Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available.
 
 Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.
 
 One major downside is that there is not a lot of widespread adopted browser support to communicate directly with hardware. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed.
-
 
 Table of comparison
 -------------------

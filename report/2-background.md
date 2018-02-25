@@ -1,1 +1,0 @@
-See ../common/background.md
