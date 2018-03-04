@@ -1,4 +1,4 @@
-# 3. Remote Embedded Software Development
+# Remote Embedded Software Development
 When working with native application software the developer is bringing the targeted platform for his application with him wherever he takes his computer. No need to worry about additional hardware, instruments or lab equipment. With a laptop and an internet connection, it is possible to efficiently work on almost any native application from anywhere.
 
 For embedded developers it is often a bit harder. If you are lucky, you only need a single development board with a single USB-cable. In this simple case, you only need a padded ESD bag and you're good to go. 
@@ -7,7 +7,7 @@ In many cases, taking the system to-go simply not an option because of size of t
 
 There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment. 
 
-## 3.1. Local Development - Local Target
+## Local Development - Local Target
 The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup.
 
 Most embedded targets, whether they are development kits or custom PCB's, can be connected to the developers computer or local network directly. Some common connections are USB or JTAG for connecting directly to a target, or RS232 and Ethernet to provide a serial console, SSH connection or general internet connectivity.
@@ -20,7 +20,7 @@ When it comes to testing the application on the target on a system level, the de
 
 This is a manual and iterative approach but for many embedded software development scenarios, this is hands down the most common and efficient one.
 
-## 3.2. Local Development - Remote Target
+## Local Development - Remote Target
 Many modern development environments use Internet Protocol related technology to flash and debug embedded targets. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network.
 
 This means that the local development environment can be the same, with the same compiler, debugging tools etc. being used as with a local target.
@@ -31,7 +31,7 @@ Having a remote target is not very efficient when it comes to instrumentation. W
 
 Another element of embedded software development not to be neglected is that to reset the target to a known state, it's often necessary to power cycle the system or disconnected and reconnect a cable. While this is very easy when the system is locally available, this might not be possible when working with a remote target.
 
-## 3.3. Remote Desktop
+## Remote Desktop
 A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
 
 One potential major upside is that the client computer does not need to have any other software installed than the a remote desktop client software. All software will have to be installed on the server computer. In the case that the server computer is actually the developers stationary work station, this means that he can work with the exact same computer setup locally and remotely.
@@ -42,7 +42,7 @@ One downsides of this solution is that it only works if you have a stable and re
 
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
-## 3.4. Cloud Development Environment
+## Cloud Development Environment
 Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available.
 
 Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.

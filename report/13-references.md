@@ -1,6 +1,4 @@
-References
-==========
+# References
 
-Input
------
-How to do this automatically?
+## Input
+- How to do this automatically?

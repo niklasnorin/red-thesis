@@ -1,6 +1,6 @@
-# 2. Software development
+# Software development
 
-## 2.1. Native application software development
+## Native application software development
 Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
 
 No matter what the software a developer writes, the workflow for a compiled language is usually the same:
@@ -13,7 +13,7 @@ No matter what the software a developer writes, the workflow for a compiled lang
 
 The program is targeting a similar type of environment as the software developers computer and is written, compiled, run and debugged on the developers computer.
 
-## 2.2. Embedded software development
+## Embedded software development
 From a bird-eye perspective, embedded software development might not seem to differ much from native application software development
 
 The workflow is similar:
