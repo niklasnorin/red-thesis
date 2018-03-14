@@ -1,6 +1,3 @@
-Result
-======
-The actual result
+# Result
 
-Future work
------------
+## Future work(?)
