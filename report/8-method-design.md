@@ -28,5 +28,8 @@ This approach requires the intercepting code to be recompiled for each targeted 
 
 ### FUSE
 
+## Security
+The FUSE kernel driver defaults to only allowing the process and user who created the mount, has access to it
 
+The FUSE kernel driver is currently configured with `allow_other`, an option which means that anyone, not only the process and user who created the mount, has access to it.
 

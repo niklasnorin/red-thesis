@@ -34,18 +34,18 @@ The configuration above only enables the underlying interrupt. Listening on the 
 
 Dynamically linked application are linked with libraries at runtime instead of at compile time. LD_PRELOAD is an environmental variable picked up by Linux dynamic linker that allows the developer to override the symbol of any dynamically linked library. Used creatively, this can be used to emulate hardware.
 
-Using LD_PRELOAD to wrap calls to file operations such as `read`, `write` and `ioctl`, it's possible to intercept and modify specific calls. This could be used to only intercept `ioctl` directed towards a SPI driver path, all others are passed down to the *real* `ioctl` and the kernel. This is exactly how umockdev (insert reference) is implemented.
+Using LD_PRELOAD to wrap calls to file operations such as `read`, `write` and `ioctl`, it's possible to intercept and modify specific calls. This could be used to only intercept `ioctl` directed towards a SPI driver path, all others are passed down to the *real* `ioctl` and the kernel. One application that implements this is umockdev [?].
 
 ### Linux kernel modules
 
-The ways the GPIO drivers work are exposed to user-space opens up multiple options to emulating GPIO's in Linux.
+The ways the GPIO drivers are exposed to user-space opens up multiple options to emulating GPIO's in Linux.
 
-From top to bottom, the way it works is that at the bottom is the GPIO driver itself. On real hardware, this would write and read to the memory mapped registers of the physical GPIO module. This module is part of the kernel and lets the kernel know exactly what GPIO's it exposes, and their capabilities.
+At the bottom most layer is the GPIO driver itself. On real hardware, this would typically write and read to the memory mapped registers of the physical GPIO module in a CPU. This module lets the kernel know exactly how to configure GPIO:s, and their capabilities.
 
-On top of this driver runs GPIOlib, which inspects all GPIO driver and uses SysFS to expose those GPIO's via the standard user-space file system.
+On top of this driver runs GPIOlib, which inspects all GPIO driver and uses SysFS to expose those GPIO's via its standard SysFS user-space file system.
 
 #### Custom GPIO driver
-Write a Linux driver for a GPIO chip that exposes a standard SysFS interface using the build in SysFS support
+Write a Linux driver for a GPIO chip that exposes a standard SysFS interface using the build in SysFS support.
 
 #### Custom SysFS driver
 Write a SysFS Linux driver that exposes the same interface as GPIOLib.
@@ -56,7 +56,3 @@ This allows reuse of the infrastructure of SysFS which makes it easy to expose "
 Linux uses a standardized filesystem model called VFS, or the Virtual File System. The VFS forwards any filesystem requests to the filesystem mounted at a specific location.
 
 Create a linux filesystem from scratch would allow to expose the same filesystem interface. This is how SysFS is implemented.
-
-### FUSE
-
-- See next chapter
