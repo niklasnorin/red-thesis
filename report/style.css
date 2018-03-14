@@ -1,23 +1,6 @@
 
 
 @media all {
-  #content {
-    display: table;
-  }
-  
-  #pageFooter {
-    display: table-footer-group;
-  }
-  
-  #pageFooter:after {
-    counter-increment: page;
-    content:"Page " counter(page);
-    left: 0; 
-    top: 100%;
-    white-space: nowrap; 
-    z-index: 20px;  
-  }
-
   .bootmark-main {
     width: 600px;
     margin: auto;
@@ -26,6 +9,8 @@
 
 @page {
   size: A4 portrait;
+  margin-top: 3cm;
+  margin-bottom: 3cm;
   margin-left: 3cm;
   margin-bottom: 3cm;
 }
@@ -52,5 +37,9 @@
   p {
     orphans: 3;
     widows: 3;
+  }
+
+  .url {
+    color: white;
   }
 }
