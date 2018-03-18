@@ -12,31 +12,31 @@ The aim of this thesis is to define and, in part, implement, a suggestion for an
 The architecture itself will be developed with the latest advances in mind, in everything from scalable software containers to combined MCU-FPGA systems. The intention is to come up with an architecture that covers the most common use-cases of modern embedded software development and one that can scale from one remote developer to thousands.
 
 ## Purpose
-Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit connected to a PC. This thesis sets out to define and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded software in an emulated environment, without access to hardware.
+Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit connected to a PC. 
+
+This thesis sets out to define and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:
 
-1. Is it possible to set up an environment which allows an embedded software developer to perform most development related tasks without access to the physical hardware?
+1. Is it possible to set up an environment on a PC which allows an embedded software developer to perform most development related tasks without access to the physical hardware?
 
-2. Is it possible to do this is such an unobtrusive way, that the exact same program executable can be run both on the real hardware target and in the emulation environment?
+2. Is it possible to do this is such an unobtrusive way, so that the exact same program can be run both on the real hardware target and in the emulation environment?
 
 3. Is it possible to present outputs and stimulate inputs in such an environment in ways not even possible with real hardware?
-
-4. What are the main limitations of such an emulated software environment?
-
-## Method
 
 ## Limitation
 To be able to focus on the core innovative aspects of the work, this report sets some strong limitations on scope.
 
 ### Linux
-This thesis will only look into embedded software built on top of the Linux kernel.
+This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers, which typically runs without an OS.
 
 ### Architecture
-Most embedded systems uses the ARM architecture, while most computers used by developers are x86 or AMD64. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator, such as QEMU. 
+Most embedded systems uses the ARM architecture, while most computers used by developers are x86 or AMD64. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator. 
 
-Because of time constraints, this thesis uses a so called interpreted programming language instead of a compiled one. This works by having a piece of software called an interpreter compiled specifically for each architecture, this in turn parses and executes the code on the fly. This setup means that the exact same code can be executed both on a PC and the target without any modification.
+Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a so called interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parse and executes the code on the fly.
+
+This setup means that the exact same code can be executed both on a PC and the target without any modification, and without having to use an emulator.
 
 ### Digital signals
 The instrumentation and hardware emulation in this thesis focuses on digital emulation of signals and communication channels. It does not aim to accurately emulate analogue signals or physical models.
@@ -50,4 +50,4 @@ The software tools used in this thesis are documented in depth in the method.
 ## Source code
 It has yet to be decided if the source code which was written as a part of this work will be released as open-source after the publication of this thesis.
 
-The frameworks, concepts and libraries used in the solution are thoughroughly documented. 
+The frameworks, concepts and libraries used in the solution are thoroughly documented.

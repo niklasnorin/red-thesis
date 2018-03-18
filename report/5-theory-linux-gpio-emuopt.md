@@ -1,8 +1,24 @@
-
 # Linux
 
+The use of Linux in embedded applications is on the rise [?](https://www.linux.com/news/embedded-linux-keeps-growing-amid-iot-disruption-says-study).
+
+Linux as an OS has several nice properties, such as:
+
+- It's free, with no royalties or licensing fees
+- Very thoroughly tested, at scale, for more than 25 years
+- Very powerful and configurable kernel
+
+Specifically for embedded software, some other nice properties include:
+
+- Supported on all major embedded architectures, such as ARM
+- Easy access to hardware via standardized interfaces
+- Possible to implement custom hardware drivers via kernel modules
+
+## Kernel and User Space
+A complete Linux OS consists of multiple components...
+
 ## SysFS and GPIOlib for user-space GPIO
-While all direct hardware access is restricted to the kernel, the SysFS is a generic Linux kernel facility that enables exposing kernel data structures an attributes to user space.
+While all direct hardware access is restricted to the kernel in Linux, the SysFS is a generic Linux kernel facility that enables exposing kernel data structures an attributes to user space.
 
 GPIOlib is built on top of SysFS and specifies an API to expose and interact with individual GPIO's.
 
