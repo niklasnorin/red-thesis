@@ -2,7 +2,7 @@
 
 FUSE, for filesystems in user-space, offers another powerful way to potentially emulate GPIO access in Linux. It consists of two parts: a kernel driver and a user-space FUSE client which talks to the kernel driver.
 
-The power of FUSE lies in that it enables the creation of custom filesystems without necessarly creating dedicated kernel modules for each filesystem. Moreover, all of this is available to the normal user of the system, no super user, or "root", access is required.
+The power of FUSE lies in that it enables the creation of custom filesystems without necessarily creating dedicated kernel modules for each filesystem. Moreover, all of this is available to the normal user of the system, no super user, or "root", access is required.
 
 The way this is implemented is that a client filesystem, running in user-space, asks the FUSE kernel module to mount a new filesystem. Any file operations directed at that mount point, such as trying to list the content of a directly, is then forwarded to the client filesystem. The client filesystem can then handle these requests in any way it wants.
 
