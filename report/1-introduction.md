@@ -51,3 +51,8 @@ The software tools used in this thesis are documented in depth in the method.
 It has yet to be decided if the source code which was written as a part of this work will be released as open-source after the publication of this thesis.
 
 The frameworks, concepts and libraries used in the solution are thoroughly documented.
+
+## Abbreviations and Acronyms
+
+**GPIO** - General Purpose Input Output
+**FUSE** - Filesystem in Userspace. Also the name of the actual kernel driver.

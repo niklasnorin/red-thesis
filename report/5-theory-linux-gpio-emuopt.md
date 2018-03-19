@@ -14,16 +14,17 @@ Specifically for embedded software, some other nice properties include:
 - Easy access to hardware via standardized interfaces
 - Possible to implement custom hardware drivers via kernel modules
 
-## Kernel and User Space
-A complete Linux OS consists of multiple components...
+## Everything is a File or a Process
+
+In Linux, everything is either a file or a process [?](http://yarchive.net/comp/linux/everything_is_file.html). Although a file in linux indeed often represents data that is persisted to disk, the filesystem is also used as a way to interact with kernel drivers.
 
 ## SysFS and GPIOlib for user-space GPIO
-While all direct hardware access is restricted to the kernel in Linux, the SysFS is a generic Linux kernel facility that enables exposing kernel data structures an attributes to user space.
+While all direct hardware access is restricted to the kernel in Linux, SysFS is a generic Linux kernel facility that enables other kernel modules to expose data structures as attributes in the file system.
 
-GPIOlib is built on top of SysFS and specifies an API to expose and interact with individual GPIO's.
+GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [?](https://www.kernel.org/doc/Documentation/gpio/sysfs.txt).
 
 ### Exposing a GPIO
-The user can expose a GPIO by writing the GPIO number to `/sys/class/gpio/export`. This will make GPIOlib look through all registred GPIO drivers and, if the GPIO is valid, expose it as a folder under `/sys/class/gpio/gpioN`, where N is the GPIO number.
+The user can expose a GPIO by writing the GPIO number to `/sys/class/gpio/export`. This will make GPIOlib look through all registered GPIO drivers and, if the GPIO is valid, expose it as a folder under `/sys/class/gpio/gpioN`, where N is the GPIO number.
 
 The content of this folder is related to the GPIO's functionality. It will have files for setting direction, reading the value and changing the value of the GPIO.
 
@@ -37,14 +38,19 @@ The current state of the GPIO is exposed underneath `/value`.
 
 If the GPIO is an output, then writing a `1` to it will set the output to logic high. Writing a `0` will set it to logic zero. Reading the `/value` will return the current output state.
 
-If the GPIO is configued as an input, then reading `/value` will return the current state of the GPIO. 
+If the GPIO is configured as an input, then reading `/value` will return the current state of the GPIO.
 
 ### Listening to interrupts
 Many input pins supports listening to interrupts. This functionality is configured via the `/edge` file. This attribute can be set to `falling` to trigger on falling edge, `raising` to trigger on raising edge or `both` to trigger on both. Setting it to `none` disables interrupt detection.
 
 The configuration above only enables the underlying interrupt. Listening on the file itself is done via Linux `poll`, which is a command that can be used to wait on arbitrary files. When `poll` returns an event, it means that an interrupt has been triggered.
 
-## Options for Emulating GPIOs
+## Options for Emulating GPIO:s
+
+There are multiple ways to emulate hardware, or trick an application to think that hardware is available. These range from simply creating a few empty files to creating low-level kernel drivers.
+
+### Duplicating SysFS with Regular Files
+Because everything is a file in Linux, standard `read` or `write` operations are used and for many operations these cannot distinguish a regular persistent file from a file that is mapped to hardware. This means that by replicating the GPIOlib file structure with regular persistent files is possible in some cases.
 
 ### LD_PRELOAD
 

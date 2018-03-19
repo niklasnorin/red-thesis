@@ -4,7 +4,29 @@
   .bootmark-main {
     width: 600px;
     margin: auto;
-  }  
+  }
+
+  body{counter-reset: section}
+  #content h1{counter-reset: sub-section}
+  #content h2{counter-reset: composite}
+  #content h3{counter-reset: detail}
+
+  #content h1:before{
+    counter-increment: section;
+    content: counter(section) " ";
+  }
+  #content h2:before{
+    counter-increment: sub-section;
+    content: counter(section) "." counter(sub-section) " ";
+  }
+  #content h3:before{
+    counter-increment: composite;
+    content: counter(section) "." counter(sub-section) "." counter(composite) " ";
+  }
+  #content h4:before{
+    counter-increment: detail;
+    content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";
+  }
 }
 
 @page {
