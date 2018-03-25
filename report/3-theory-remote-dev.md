@@ -35,7 +35,7 @@ Similarly, having a remote target is also not very efficient when it comes to in
 
 Another element of embedded software development not to be neglected is that to reset the target to a known state, it's often necessary to power cycle the system or disconnected and reconnect a cable. While this is very easy when the system is locally available, this might not be possible when working with a remote target.
 
-With all this being said, there has been tremendous progress is remotely deploy embedded software. Services such as Resin.io [#](?) makes it possible to deploy almost any code written locally to a remote target.
+With all this being said, there has been tremendous progress is remotely deploy embedded software. Services such as Resin.io [[#](?)] makes it possible to deploy almost any code written locally to a remote target.
 
 ## Remote Desktop
 A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
