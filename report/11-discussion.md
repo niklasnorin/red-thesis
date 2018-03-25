@@ -46,7 +46,7 @@ Adding the possibility to mux the pins of the Target Application to any other pi
 - Add GPIOLib error messages
 
 ### Performance of FUSE
-FUSE is apparently notorious for being slow [?] but no benchmarking has been done.
+FUSE is apparently notorious for being slow [#](?) but no benchmarking has been done.
 
 ### Support more drivers
 - SPI

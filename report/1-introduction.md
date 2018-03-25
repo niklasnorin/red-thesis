@@ -32,7 +32,7 @@ To be able to focus on the core innovative aspects of the work, this report sets
 This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers, which typically runs without an OS.
 
 ### Architecture
-Most embedded systems uses the ARM architecture [?], while most computers used by developers are x86 or AMD64 [?]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
+Most embedded systems uses the ARM architecture [#](?), while most computers used by developers are x86 or AMD64 [#](?). This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
 
 Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a so called interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parse and executes the code on the fly.
 

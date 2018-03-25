@@ -22,7 +22,7 @@ Firstly, embedded code often depends heavily on hardware peripherals on the proc
 Secondly, embedded code often depends on externally connected components, like buttons or displays connected via inputs, outputs or serial protocols. These interactions are often hard to emulate and there are few standard ways of emulating, nor stimulating, these component together with application code.
 
 ## Full system emulation
-There are emulators, such as QEMU [?] or VirtualBox [?], that are considered full-system emulators. What this means is that the emulator can emulate the architecture and the environment needed to run both the OS and the application that is targeting another target than the host.
+There are emulators, such as QEMU [#](?) or VirtualBox [#](?), that are considered full-system emulators. What this means is that the emulator can emulate the architecture and the environment needed to run both the OS and the application that is targeting another target than the host.
 
 Of these full-system emulators, a subset can run a full Linux OS and applications compiled for ARM on a x86 computer and at the same time also emulate hardware to the lowest level. It essentially equates to being able to intercept memory mapped register writes and reads and redirecting them to custom emulated drivers. This is very powerful and allows e.g. hardware specific Linux GPIO drivers to be used directly without any modification.
 
