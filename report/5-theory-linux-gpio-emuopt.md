@@ -1,6 +1,6 @@
 # Linux
 
-The use of Linux in embedded applications is on the rise [[[#](?)]](https://www.linux.com/news/embedded-linux-keeps-growing-amid-iot-disruption-says-study).
+The use of Linux in embedded applications is on the rise [[#](https://www.linux.com/news/embedded-linux-keeps-growing-amid-iot-disruption-says-study)].
 
 Linux as an OS has several nice properties, such as:
 

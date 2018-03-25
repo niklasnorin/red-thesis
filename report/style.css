@@ -42,6 +42,10 @@
   margin-bottom: 3cm;
 }
 
+@page :first {
+  margin: auto;
+}
+
 
 @media print
 {
