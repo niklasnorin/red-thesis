@@ -18,7 +18,12 @@ Specifically for embedded software, some other nice properties include:
 
 In Linux, everything is either a file or a process [?](http://yarchive.net/comp/linux/everything_is_file.html). Although a file in linux indeed often represents data that is persisted to disk, the filesystem is also used as a way to interact with kernel drivers.
 
-## SysFS and GPIOlib for user-space GPIO
+## Kernel space and User space
+The memory space in Linux is divided between Kernel space and User space. Kernel space is where the kernel processes executes, while User space is where all other programs and services run.
+
+The notion of Kernel space and User space is also used to refer to the amount of access a process has to the system. In most Linux systems, only processes running in Kernel space has access to memory mapped hardware [?]. This means that User space processes that want to access hardware always have to do so via system calls to the kernel. The kernel then in turn accesses the hardware.
+
+## SysFS and GPIOlib for User Space GPIO
 While all direct hardware access is restricted to the kernel in Linux, SysFS is a generic Linux kernel facility that enables other kernel modules to expose data structures as attributes in the file system.
 
 GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [?](https://www.kernel.org/doc/Documentation/gpio/sysfs.txt).
@@ -57,7 +62,7 @@ Dynamically linked application are linked with libraries at runtime instead of a
 Using LD_PRELOAD to wrap calls to file operations such as `read`, `write` and `ioctl`, it's possible to intercept and modify specific calls. This could be used to only intercept `ioctl` directed towards a SPI driver path, all others are passed down to the *real* `ioctl` and the kernel. One application that implements this is umockdev [?](https://github.com/martinpitt/umockdev).
 
 ### Linux Kernel Driver
-The ways the GPIO drivers are exposed to user-space opens up multiple options for emulating GPIO hardware in Linux.
+The ways the GPIO drivers are exposed to user space opens up multiple options for emulating GPIO hardware in Linux.
 
 #### Custom GPIO Driver
 At the bottom most layer is the GPIO driver itself. On real hardware, this would typically write and read to the memory mapped registers of the physical GPIO module in a CPU. This module lets the kernel know exactly how to configure GPIO:s, and their capabilities [?].
@@ -67,7 +72,7 @@ It would be possible to write a Linux driver that would pretend it is a GPIO dri
 Any writes to e.g. `/sys/class/gpio/gpio1/value` would actually be handled by the custom GPIO driver.
 
 #### Custom SysFS Driver
-GPIOlib works by inspecting all GPIO drivers and then uses SysFS to expose those GPIO:s via its standard SysFS user-space file system [?].
+GPIOlib works by inspecting all GPIO drivers and then uses SysFS to expose those GPIO:s via its standard SysFS user space file system [?].
 
 One alternative to writing a GPIO driver, would be to implement a custom version of GPIOlib. This would expose the exact same interface as GPIOlib via SysFS, but it would not interact with any real GPIO drivers in any way. Instead of searching for GPIO drivers, it could expose anything it wants via SysFS and handle incoming requests in any way it wants.
 

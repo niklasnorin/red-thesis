@@ -6,6 +6,11 @@
     margin: auto;
   }
 
+  .todo {
+    background-color: khaki;
+    border:1px solid black;
+  }
+
   body{counter-reset: section}
   #content h1{counter-reset: sub-section}
   #content h2{counter-reset: composite}

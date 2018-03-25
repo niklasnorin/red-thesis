@@ -23,7 +23,7 @@ Some of the questions that this thesis sets out to answer are:
 
 2. Is it possible to do this is such an unobtrusive way, so that the exact same program can be run both on the real hardware target and in the emulation environment?
 
-3. Is it possible to present outputs and stimulate inputs in such an environment in ways not even possible with real hardware?
+3. Is it possible to represent outputs and stimulate inputs in such an environment to the extent possible with real hardware?
 
 ## Limitation
 To be able to focus on the core innovative aspects of the work, this report sets some strong limitations on scope.
@@ -32,22 +32,25 @@ To be able to focus on the core innovative aspects of the work, this report sets
 This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers, which typically runs without an OS.
 
 ### Architecture
-Most embedded systems uses the ARM architecture, while most computers used by developers are x86 or AMD64. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator. 
+Most embedded systems uses the ARM architecture [?], while most computers used by developers are x86 or AMD64 [?]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
 
 Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a so called interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parse and executes the code on the fly.
 
-This setup means that the exact same code can be executed both on a PC and the target without any modification, and without having to use an emulator.
+This setup means that the exact same code can be executed both on a PC and the target without any modification, without cross-compilation and without having to use an emulator.
 
 ### Digital Signals
 The instrumentation and hardware emulation in this thesis focuses on digital emulation of signals and communication channels. It does not aim to accurately emulate analogue signals or physical models.
 
 ## Tools
 
+*TODO*
 - Add hardware that will be used in the hardware demo
-
-The software tools used in this thesis are documented in depth in the method.
+- The tools needed to reproduce what's in this thesis (software & hardware)
 
 ## Source Code
+*TODO*
+- Decide what do to with the source code
+
 It has yet to be decided if the source code which was written as a part of this work will be released as open-source after the publication of this thesis.
 
 The frameworks, concepts and libraries used in the solution are thoroughly documented.
