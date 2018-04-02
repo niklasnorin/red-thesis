@@ -51,6 +51,15 @@ Adding the possibility to map the pins of the Target Application to any other pi
 
 FUSE is apparently notorious for being slow [[#](?)] but no benchmarking has been done.
 
+### Run as Native SysFS Linux Kernel Module Driver
+
+Instead of using FUSE, create a native SysFS module which contains logic for
+1. Exposing arbitrary GPIOlib compatible folders
+2. Support mapping the GPIO:s in these folders to each other
+3. Support "GPIO passthrough" to write to the real GPIO:s
+
+This would probably be *a lot* faster than FUSE. However, it would require the kernel module to be compiled for each platform.
+
 ### Support more drivers
 - SPI
 - I2C

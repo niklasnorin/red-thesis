@@ -8,39 +8,42 @@ This means that, in this environment, the application will find that interacting
 - Set up features needed to run the Stopwatch application
 - Select emulation technology
 
-## Features
-There are several features needed to support this kind of architecture. This section will outline some of the most important as well as some minor, and even optional, ones.
+## Requirements
+There are several requirements needed to support this kind of architecture. This section will outline some of the most important ones.
 
-### Core Features
-The Target Application should be able to interact with GPIO's as if they were physically there. This should be done by:
+### Core Requirements
+The Target Application should be able to interact with GPIO's as if they were physically there. This means that Quarterdock shall:
 
-1. Emulating GPIO hardware in a way transparent to the Target Application.
+**R1.** Emulate GPIO hardware in a way transparent to the Target Application.
 
-2. Stimulate the peripheral "other side" of emulated inputs and outputs from a Emulated Hardware Application.
+**R2.** Be able to be used to stimulate the peripheral "other side" of emulated inputs and outputs from a Emulated Hardware Application.
 
-The first point is very important for the Target Application to be able to interact with the hardware drivers without any modification. This means that all interfaces needs to be the same as the real hardware, as well as the data passed both ways over those interfaces.
+The first requirement is very important for the Target Application to be able to interact with the hardware drivers without any modification. This means that all interfaces needs to be the same as the real hardware, as well as the data passed both ways over those interfaces.
 
-The second point is important for the Target Application to be able to expect the same behavior from attached hardware as it would on the real target. If, for example, an application is expecting to read a specific value from an input after having written to an output, then being able to insert some application logic between the two is essential.
+The second requirement is important for the Target Application to be able to expect the same behavior from attached hardware as it would on the real target. If, for example, an application is expecting to read a specific value from an input after having written to an output, then being able to insert some application logic between the two is essential.
 
-### Additional Features
+### Additional Requirements
 In addition to the above, Quarterdock shall also:
 
-- Support operating GPIO's as both input and output.
-- Support interrupts on input change.
-- Work for both statically and dynamically linked applications.
-- Aim to work on as many Linux distributions as possible.
-- Be possible to run on any Host OS.
-- Enable the developer to write the Emulated Hardware Application in a way that accesses hardware in the same way as the Target Application.
+**R3.** Support operating GPIO's as both input and output.
 
-This last feature allows the developer to write emulated hardware code using the exact same language and libraries that he is already using to write his application.
+**R4.** Support interrupts on input change.
 
-### Optional Features
-Some nice-to-have features, that are not essential for local PC development, are:
+**R5.** Work for both statically and dynamically linked applications.
 
-- That it should be possible to run Quarterdock on real hardware.
-- That is should be possible for Quarterdock to both intercept and forward writes to GPIO:s to the real GPIO:s when run on real hardware.
+**R6.** Aim to work on as many Linux distributions as possible.
 
-These features combined could enable intercept GPIO access on the real hardware while still operating normally. This in turn could be used to develop virtual logical analyzers that can be run on real hardware.
+**R7.** Be possible to run on any Host OS.
+
+**R8.** Enable the developer to write the Emulated Hardware Application in a way that accesses hardware in the same way as the Target Application. This allows the developer to write emulated hardware code using the exact same language and libraries that he is already using to write his application.
+
+**R9.** Be possible to run Quarterdock on real hardware.
+
+**R10.** Be possible for Quarterdock to both intercept and forward writes to GPIO:s to the real GPIO:s when run on real hardware.
+
+**R11.** Not be able to crash the entire target in case of a bug in Quarterdock
+
+These last two features combined could enable intercept GPIO access on the real hardware while still operating normally. This in turn could be used to develop virtual logical analyzers that can be run on real hardware.
 
 ## Selecting Option for Emulating GPIO
 As was outlined in the chapter [ref:Options for Emulating GPIO](?) there are multiple options for intercepting calls to GPIO:s in Linux. Each comes with their pros and cons and differ vastly in when, and how, they intercept calls to hardware.
@@ -57,17 +60,18 @@ For the buttons however this approach will not work. The Stopwatch Example Appli
 Using `inotify` when running on a PC and e.g. `poll` (which works on SysFS files) on the real hardware would go against the HAL principle since it would mean the application would need to be changed to run on a PC.
 
 ### LD_PRELOAD
-This approach only works for dynamically linked applications by design, and so breaks the Quarterdock requirements. It should work for statically linked applications as well as dynamically linked ones.
+This approach only works for dynamically linked applications by design, and so breaks the Quarterdock requirements. Quarterdock should work for both dynamically linked and statically linked applications.
 
 ### Linux Kernel Driver
-#### Custom GPIO Driver
-#### Custom SysFS Driver
-#### Custom Linux filesystem
+Creating a custom Linux kernel driver offers many different options.
+
+Requirement **R11** prohibits running Quarterdock itself inside the kernel, as a bug in Quarterdock would risk a "kernel panic" which in turn could bring down the whole system [[#Kernel Panic](?)].
 
 ### FUSE
+
+- Write about FUSE
 
 ## Security
 The FUSE kernel driver defaults to only allowing the process and user who created the mount, has access to it
 
 The FUSE kernel driver is currently configured with `allow_other`, an option which means that anyone, not only the process and user who created the mount, has access to it.
-
