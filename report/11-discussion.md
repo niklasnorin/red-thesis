@@ -2,7 +2,7 @@
 
 ## Input
 
-- Programatically access to IO stimulus can be superior to having full local access with real hardware for testing purposes
+- Programmatically access to IO stimulus can be superior to having full local access with real hardware for testing purposes
 - If kits are connected with specialized “shield”, they could potentially expose inputs and outputs to the internet in some way. These shields would most likely need to be designed per each development kit. Latency wise - code stimulating inputs/output would most likely need to execute on, or near, these “shields”. Also a 1:1 mapping shield-application.
 - Emulation: It is possible to emulate hardware to some degree in QEMU, but it's not very simple or straight forward.
 
@@ -26,19 +26,19 @@ This is not a problem for a developer PC, but could be a problem if run on a sha
 
 A solution to this could be to pass the UID, User ID, and GID, Group ID, of users that should have access to Quarterdock. Quarterdock could then use the FUSE context, that is passed with every FUSE request, to check the user agains an access list.
 
-### Lack of pin ownership
+### Lack of GPIO ownership
 Although each instance of a Quarterdock Client has their own private GPIO configuration (`direction`, `edge` etc.) the `value` is a shared resource. There is no access control to the `value`, nor even a sanity check of `direction` before updating `value` on write.
 
 This means that in the most common use-case, where one client configures a pin as an output and a second one listens on that same pin configured as an input, then there's nothing stopping the input-listener to accidentally change the value of `value`.
 
 This could be implementing by expanding the configuration options of Quarterdock to set
 
-### Lack of pin mux
-It is not possible to route one pin to another pin in Quarterdock. 
+### Lack of GPIO mapping
+It is not possible to map one pin in one Client to another pin in another Client in Quarterdock.
 
 This means that it's currently impossible to write a generic Quarterdock Client to emulate hardware, as each board has a unique pinout.
 
-Adding the possibility to mux the pins of the Target Application to any other pin of the hardware emulator would enable this. This could be done by adding one layer of indirection in Quarterdock together with a per-Client pin configuration.
+Adding the possibility to map the pins of the Target Application to any other pin of the hardware emulator would enable this. This could be done by adding one layer of indirection in Quarterdock together with a per-Client pin configuration.
 
 ### Fulfill the entire GPIOLib interface
 - Add support for `active_low`

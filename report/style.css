@@ -3,7 +3,7 @@
 @media all {
   .bootmark-main {
     width: 600px;
-    margin: auto;
+    margin-top: auto;
   }
 
   .todo {
@@ -18,19 +18,19 @@
 
   #content h1:before{
     counter-increment: section;
-    content: counter(section) " ";
+    content: counter(section) ". ";
   }
   #content h2:before{
     counter-increment: sub-section;
-    content: counter(section) "." counter(sub-section) " ";
+    content: counter(section) "." counter(sub-section) ". ";
   }
   #content h3:before{
     counter-increment: composite;
-    content: counter(section) "." counter(sub-section) "." counter(composite) " ";
+    content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
   }
   #content h4:before{
     counter-increment: detail;
-    content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";
+    content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
   }
 }
 
@@ -42,10 +42,15 @@
   margin-bottom: 3cm;
 }
 
+/*
 @page :first {
   margin: auto;
 }
+*/
 
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
 
 @media print
 {

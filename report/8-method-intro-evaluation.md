@@ -3,9 +3,29 @@ As stated in the introduction:
 
 > This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
 
-To evaluate this software architecture, and to give a concrete target for requirements, an example application will be implemented. This application will expect certain hardware GPIO:s to be available to it to function, and will exercise them.
+The method that will be used to develop this architecture is to:
+
+1. Set up an Example Software to evaluate the design and implementation of the architecture
+2. Design the architecture
+3. Implement the architecture
+4. Test the architecture with the Example Software
+
+If the Example Software is considered a test, then this would be similar to a Test Driven Development, TDD, approach [#](?).
+
+## Nomenclature
+The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used in most cases.
+
+Applications which uses Quarterdock is a Quarterdock Client.
+
+The embedded software application which is intended to run on an embedded target, and should also be able to run on Quarterdock, will be called the Target Application. When running in Quarterdock, the Target Application is a Quarterdock Client.
+
+The software application which emulates the hardware for a Target Application is an Emulated Hardware Application. An Emulated Hardware Application is also a Quarterdock Client.
 
 ## Evaluate Architecture
+To evaluate this software architecture, and to give a concrete target for requirements, an example application will be implemented. This application will expect certain hardware GPIO:s to be available to it to function, and will exercise them.
+
+Only the intent of the evaluation software, and the high-level behavior, is described in this chapter. Please see [ref:Appendix X](?) for some notes and code related to the actual implementation.
+
 The evaluation software will be divided into two parts
 
 1. The Example Application

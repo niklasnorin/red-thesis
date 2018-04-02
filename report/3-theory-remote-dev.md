@@ -42,7 +42,7 @@ One potential major upside is that the client computer does not need to have any
 
 Some of the other upsides are the same as when working with the remote target, as explained previously - the target is simply set up towards the server as if the server was a local development environment. One difference compared to the remote target workflow is that even if the target hardware does not support working remotely natively (e.g. over Ethernet), it can simply be connected to a server locally, and then still be worked with remotely by the client.
 
-One downsides of this solution is that it only works if you have a stable and relatively high-thruput and low-latency internet connection to work over. Another major downside is that you have to have two computers, one that's constantly connected to the target, and one client to work remotely from. For many use-cases and remote desktop client, the server can also only serve one client at a time, so it will scale poorly.
+One downsides of this solution is that it only works if you have a stable and relatively high-throughput and low-latency internet connection to work over. Another major downside is that you have to have two computers, one that's constantly connected to the target, and one client to work remotely from. For many use-cases and remote desktop client, the server can also only serve one client at a time, so it will scale poorly.
 
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
