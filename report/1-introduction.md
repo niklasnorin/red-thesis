@@ -14,7 +14,7 @@ The architecture itself will be developed with the latest advances in mind, in e
 ## Purpose
 Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit connected to a PC. 
 
-This thesis sets out to define and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
+This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:
@@ -31,7 +31,10 @@ To be able to focus on the core innovative aspects of the work, this report sets
 ### Linux
 This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers, which typically runs without an OS.
 
-### Architecture
+### Local Target
+The solution that this thesis sets out to design will focus on replacing local development, on a local target, on the developers PC. For reference, working with remote targets are described in the theory part of the thesis.
+
+### Processor Architecture
 Most embedded systems uses the ARM architecture [[#](?)], while most computers used by developers are x86 or AMD64 [[#](?)]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
 
 Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a so called interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parse and executes the code on the fly.
@@ -59,3 +62,4 @@ The frameworks, concepts and libraries used in the solution are thoroughly docum
 
 **GPIO** - General Purpose Input Output
 **FUSE** - Filesystem in Userspace. Also the name of the actual kernel driver.
+**Target** - The real embedded hardware which is the target platform for embedded software.

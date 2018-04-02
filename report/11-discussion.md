@@ -46,6 +46,9 @@ Adding the possibility to mux the pins of the Target Application to any other pi
 - Add GPIOLib error messages
 
 ### Performance of FUSE
+
+- Mention https://www.usenix.org/system/files/conference/fast17/fast17-vangoor.pdf
+
 FUSE is apparently notorious for being slow [[#](?)] but no benchmarking has been done.
 
 ### Support more drivers

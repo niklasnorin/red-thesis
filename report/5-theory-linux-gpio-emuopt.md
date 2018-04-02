@@ -28,6 +28,8 @@ While all direct hardware access is restricted to the kernel in Linux, SysFS is 
 
 GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [[#Linux Kernel Documentation, 2018-03-25](https://www.kernel.org/doc/Documentation/gpio/sysfs.txt)].
 
+SysFS together with GPIOlib is a perfect example of a Hardware Abstraction Layer, or HAL. No matter the underlying platform, accessing GPIO:s is done in the exact same way on Linux. The application wouldn't have to change when using a different platform, except possibly to be configured to use different GPIO:s on different hardware.
+
 ### Exposing a GPIO
 The user can expose a GPIO by writing the GPIO number to `/sys/class/gpio/export`. This will make GPIOlib look through all registered GPIO drivers and, if the GPIO is valid, expose it as a folder under `/sys/class/gpio/gpioN`, where N is the GPIO number. The rest of the paths in the sub-sections below are relative to this path.
 
@@ -38,19 +40,19 @@ Most GPIO's will be able to be configured either as an input or an output. This 
 
 Writing `in` to the direction file will configure it as an input, while writing `out` will configure it as an output.
 
-### Input and output
+### Input and Output
 The current state of the GPIO is exposed underneath `/value`. 
 
 If the GPIO is an output, then writing a `1` to it will set the output to logic high. Writing a `0` will set it to logic zero. Reading the `/value` will return the current output state.
 
 If the GPIO is configured as an input, then reading `/value` will return the current state of the GPIO.
 
-### Listening to interrupts
+### Listening to Interrupts
 Many input pins supports listening to interrupts. This functionality is configured via the `/edge` file. This attribute can be set to `falling` to trigger on falling edge, `raising` to trigger on raising edge or `both` to trigger on both. Setting it to `none` disables interrupt detection.
 
 The configuration above only enables the underlying interrupt. Listening on the file itself is done via Linux `poll`, which is a command that can be used to wait on arbitrary files. When `poll` returns an event, it means that an interrupt has been triggered.
 
-## Options for Emulating GPIO:s
+## Options for Emulating GPIO
 There are multiple ways to emulate hardware, or trick an application to think that hardware is available. These range from simply creating a few empty files to creating low-level kernel drivers.
 
 ### Duplicating SysFS with Regular Files

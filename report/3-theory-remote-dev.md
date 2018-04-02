@@ -5,9 +5,7 @@ For embedded developers it is often more complicated. If you are lucky, you only
 
 In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
 
-There are several solutions to working with most embedded software development remotely. 
-
-For reference, we will first talk about working in a local environment.
+There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment.
 
 ## Local Development - Local Target
 The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup.
@@ -20,10 +18,10 @@ The main development workflow will be as described in *Embedded Software Develop
 
 Cross-compiling is done on the developers computer, the resulting binaries are transferred locally to the target and the application executed, debugged and observed by the developer in real-time.
 
-When it comes to testing the application on the target on a system level, the developer can in many cases simply lean over to press a button and observe if he sees the appropriate behaviour. If it is not the desired behaviour, then the code is changed and the process is repeated again.
+When it comes to testing the application on the target on a system level, the developer can in many cases simply lean over to press a button and observe if he sees the appropriate behavior. If it is not the desired behavior, then the code is changed and the process is repeated again.
 
 ## Local Development with Remote Target
-Many modern development environments use Internet Protocol related technology to flash and debug embedded targets. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network.
+Many modern development environments use Internet Protocol, IP, related technology to flash and debug embedded targets [[#](?)]. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network [[#](?)].
 
 This means that the local development environment can be the same, with the same compiler, debugging tools etc. being used as with a local target.
 
@@ -49,11 +47,11 @@ One downsides of this solution is that it only works if you have a stable and re
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
 ## Cloud Development Environment
-Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available.
+Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available [#Cloud9 IDE](?).
 
 Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.
 
-One major downside is that there is not a lot of widespread adopted browser support to communicate directly with hardware. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed.
+One downside to this is that there is not a lot of widespread adopted browser support to communicate directly with hardware. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed. However, there are some initiatives to overcome this to, for example, be able to use USB devices from the browser [#USB in browser](?).
 
 Table of comparison
 -------------------
