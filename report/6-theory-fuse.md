@@ -1,5 +1,4 @@
 # FUSE
-
 FUSE, short for Filesystems in USEr-space, offers yet another potentially powerful way to emulate GPIO access in Linux.
 
 The power of FUSE lies in that it enables the creation of custom filesystems without creating dedicated kernel modules for each filesystem [[#](?)]. Moreover, all of this is available to the normal user of the system, no super user, or "root", access is required.
@@ -9,6 +8,9 @@ FUSE consists of two parts: a kernel driver and a user-space FUSE client which t
 FUSE has been a part of mainstream Linux since Linux Kernel version 2.6.14, released in 2005 [[#Linux Kernel Git Log, 2018-03-25](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d8a5ba45457e4a22aa39c939121efd7bb6c76672)].
 
 *TODO: INSERT GRAPH SHOWING FUSE REQUESTS*
+
+## FUSE Security
+A mounted FUSE filesystem is normally only available to the user that mounted the filesystem. This can be overridden to extend to all users with a `allow_other` configuration option.
 
 ## Example: Encrypted filesystem
 How FUSE works, and how it could be useful, could easily be illustrated with EncFS.

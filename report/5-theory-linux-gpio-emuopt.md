@@ -50,13 +50,15 @@ If the GPIO is configured as an input, then reading `/value` will return the cur
 ### Listening to Interrupts
 Many input pins supports listening to interrupts. This functionality is configured via the `/edge` file. This attribute can be set to `falling` to trigger on falling edge, `raising` to trigger on raising edge or `both` to trigger on both. Setting it to `none` disables interrupt detection.
 
-The configuration above only enables the underlying interrupt. Listening on the file itself is done via Linux `poll`, which is a command that can be used to wait on arbitrary files. When `poll` returns an event, it means that an interrupt has been triggered.
+The configuration above only enables the underlying interrupt. Listening on the file itself is done via Linux `poll`, which is a command that can be used to wait on arbitrary files. When `poll` is used on `/value` and it returns an event, it means that an interrupt has been triggered and there has been a change in the underlying value.
 
 ## Options for Emulating GPIO
 There are multiple ways to emulate hardware, or trick an application to think that hardware is available. These range from simply creating a few empty files to creating low-level kernel drivers.
 
 ### Duplicating SysFS with Regular Files
 Because everything is a file in Linux, standard `read` or `write` operations are used and for many operations these cannot distinguish a regular persistent file from a file that is mapped to hardware. This means that by replicating the GPIOlib file structure with regular persistent files is possible in some cases.
+
+Linux also contains an API for listening for changes in files called `inotify` [#Linux Programmer's Manual, Michael Kerrisk - Linux man-pages maintainer, 2018-04-02](http://man7.org/linux/man-pages/man7/inotify.7.html)]. This can be used to listen to if there is new data available to read or if it is possible to write to a file.
 
 ### LD_PRELOAD
 Dynamically linked application are linked with libraries at runtime instead of at compile time. LD_PRELOAD is an environmental variable picked up by Linux dynamic linker that allows the developer to override the symbol of any dynamically linked library. Used creatively, this can be used to emulate hardware.

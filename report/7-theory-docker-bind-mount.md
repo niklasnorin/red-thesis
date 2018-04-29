@@ -22,7 +22,9 @@ A Docker Container is an instance of a Docker Image running in the Docker daemon
 Docker provides a unified way to share data with Docker Containers. This includes both sharing data between multiple containers as well as sharing data between a container and the Host OS.
 
 ### Bind mounts
-Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [[#](?)].
+Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [[#](?)]. Bind mounts work by mounting a replica of the _source folder_ into a _target folder_. Any changes done in either folder will be replicated in the other.
+
+The way sub-mounts, mounts inside the source or target folder, works depends on what is known as bind propagation. Depending on the bind propagation setting, mounts inside either folder can be private (`private`/`rprivate`), shared one way (`slave`/`rslave`) or shared both ways (`shared`/`rshared`). This can also be applied to only those folders, or recursively (the `r` in `rshared`) to any mount inside those bind mounts.
 
 Bind mounting over an existing folder will replace the content of that folder with the content of the bind mount source. This can be done over any folder, even system folder like `/tmp` or `/sys`.
 
@@ -30,3 +32,8 @@ Bind mounting over an existing folder will replace the content of that folder wi
 Typically, Docker Containers do not have access to hardware because they are not run as a super user [[#](?)]. This means that it does not have the elevated access needed to do most system calls to the kernel. The upside of this is that it minimizes the risk that one container affects the environment of another container.
 
 To be able to access hardware, the Docker Container either has to be run in privileged mode, granting it system wide super user access, or be explicitly granted access on a device-by-device level.
+
+## Docker Compose
+Since Docker containers are usually constructed to be isolated and self contained it is often necessary to run multiple Docker containers to perform a given task. For example, a simple web-server might consist of one Docker container running the actual web-server and another which only runs the database.
+
+While it is possible to manually start multiple Docker containers, Docker Compose offer a declarative configuration syntax of automating it. Using Docker Compose, each Docker container is simply a entry in a `docker-compose.yml`-file. There each container can be configured with the exact same parameters that would be availble if they were started one by one.

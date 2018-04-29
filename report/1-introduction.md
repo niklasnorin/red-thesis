@@ -25,14 +25,16 @@ Some of the questions that this thesis sets out to answer are:
 
 3. Is it possible to represent outputs and stimulate inputs in such an environment to the extent possible with real hardware?
 
-## Limitation
+## Limitation of Scope
 To be able to focus on the core innovative aspects of the work, this report sets some strong limitations on scope.
 
 ### Linux
-This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers, which typically runs without an OS.
+This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers.
 
 ### Local Target
-The solution that this thesis sets out to design will focus on replacing local development, on a local target, on the developers PC. For reference, working with remote targets are described in the theory part of the thesis.
+The solution that this thesis sets out to design will focus on replacing local development, on a local target, on the developers PC.
+
+Working with remote targets are described in the theory part of the thesis though, this to provide a more comprehensive picture of the options available to developers today.
 
 ### Processor Architecture
 Most embedded systems uses the ARM architecture [[#](?)], while most computers used by developers are x86 or AMD64 [[#](?)]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
@@ -42,7 +44,7 @@ Because of time constraints, the evaluation software used to evaluate the archit
 This setup means that the exact same code can be executed both on a PC and the target without any modification, without cross-compilation and without having to use an emulator.
 
 ### Digital Signals
-The instrumentation and hardware emulation in this thesis focuses on digital emulation of signals and communication channels. It does not aim to accurately emulate analogue signals or physical models.
+The instrumentation and hardware emulation in this thesis focuses on digital emulation of signals and communication channels.
 
 ## Tools
 

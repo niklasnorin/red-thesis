@@ -1,3 +1,0 @@
-# Result
-
-## Future work(?)

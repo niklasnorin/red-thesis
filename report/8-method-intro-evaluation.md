@@ -10,7 +10,7 @@ The method that will be used to develop this architecture is to:
 3. Implement the architecture
 4. Test the architecture with the Example Software
 
-If the Example Software is considered a test, then this would be similar to a Test Driven Development, TDD, approach [#](?).
+If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [#](?).
 
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used in most cases.
@@ -22,11 +22,11 @@ The embedded software application which is intended to run on an embedded target
 The software application which emulates the hardware for a Target Application is an Emulated Hardware Application. An Emulated Hardware Application is also a Quarterdock Client.
 
 ## Evaluate Architecture
-To evaluate this software architecture, and to give a concrete target for requirements, an example application will be implemented. This application will expect certain hardware GPIO:s to be available to it to function, and will exercise them.
+To evaluate this software architecture, and to give a concrete target for requirements, an Example Application will be implemented. This application will expect certain hardware GPIO:s to be available to it to function, and will exercise them.
 
 Only the intent of the evaluation software, and the high-level behavior, is described in this chapter. Please see [ref:Appendix X](?) for some notes and code related to the actual implementation.
 
-The evaluation software will be divided into two parts
+The evaluation software will be divided into two parts:
 
 1. The Example Application
 2. The Emulated Hardware Application

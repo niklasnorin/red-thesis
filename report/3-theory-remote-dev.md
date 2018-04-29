@@ -35,6 +35,8 @@ Another element of embedded software development not to be neglected is that to 
 
 With all this being said, there has been tremendous progress is remotely deploy embedded software. Services such as Resin.io [[#](?)] makes it possible to deploy almost any code written locally to a remote target.
 
+<div class=".no-break">
+
 ## Remote Desktop
 A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
 
@@ -45,6 +47,8 @@ Some of the other upsides are the same as when working with the remote target, a
 One downsides of this solution is that it only works if you have a stable and relatively high-throughput and low-latency internet connection to work over. Another major downside is that you have to have two computers, one that's constantly connected to the target, and one client to work remotely from. For many use-cases and remote desktop client, the server can also only serve one client at a time, so it will scale poorly.
 
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
+
+</div>
 
 ## Cloud Development Environment
 Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available [#Cloud9 IDE](?).

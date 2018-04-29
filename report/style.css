@@ -42,15 +42,15 @@
   margin-bottom: 3cm;
 }
 
+.no-break {
+  page-break-inside: avoid;
+}
+
 /*
 @page :first {
   margin: auto;
 }
 */
-
-h1, h2, h3, h4, h5 {
-  page-break-after: avoid;
-}
 
 @media print
 {
