@@ -28,6 +28,8 @@ The way sub-mounts, mounts inside the source or target folder, works depends on 
 
 Bind mounting over an existing folder will replace the content of that folder with the content of the bind mount source. This can be done over any folder, even system folder like `/tmp` or `/sys`.
 
+Please note that the folder must exist, or be possible to create, to be the target for a bind mount.
+
 ## Access to Hardware
 Typically, Docker Containers do not have access to hardware because they are not run as a super user [[#](?)]. This means that it does not have the elevated access needed to do most system calls to the kernel. The upside of this is that it minimizes the risk that one container affects the environment of another container.
 
@@ -37,3 +39,10 @@ To be able to access hardware, the Docker Container either has to be run in priv
 Since Docker containers are usually constructed to be isolated and self contained it is often necessary to run multiple Docker containers to perform a given task. For example, a simple web-server might consist of one Docker container running the actual web-server and another which only runs the database.
 
 While it is possible to manually start multiple Docker containers, Docker Compose offer a declarative configuration syntax of automating it. Using Docker Compose, each Docker container is simply a entry in a `docker-compose.yml`-file. There each container can be configured with the exact same parameters that would be availble if they were started one by one.
+
+## Docker Machine
+Docker runs all containers on top of the same kernel. Docker containers can run on several different kernels natively. The latest versions of docker can run natively on top of both the Windows and OS X hypervisor in addition to the Linux kernel [[#Docker Machine, Docker](https://docs.docker.com/machine/overview/)]. 
+
+Each platform has their own Docker bundle, because each platform has different needs. When running Docker on Linux, Docker can use the Linux client more or less directly. However, when running Linux containers on Windows, they have to be run inside a Linux Virtual Machine (or on top of the Windows hypervisor) so that there is a Linux kernel available.
+
+Docker Machine is a tool from Docker which can be used on any platform to setup a virtual machine and the Docker runtime for you. It can be configured to use VirtualBox [[#](?)] or other virtual machines.

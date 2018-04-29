@@ -1,8 +1,3 @@
 # References
 
-## Input
-- How to do this automatically?
-
-## References
-
-
+*TODO: Insert all references from raw material*

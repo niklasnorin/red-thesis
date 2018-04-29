@@ -173,6 +173,13 @@ While the Target Application and the Emulated Hardware Application both have to 
 
 A strong side benefit of this also that Quarterdock can easily be built on any developers PC, as the build itself is executed inside Docker.
 
+### Docker Machine
+Quarterdock is run using Docker Machine with VirtualBox as the virtual machine, with a small VM image called `boot2docker`.
+
+Because the `boot2docker` kernel doesn't include GPIOlib support (common for kernels that doesn't target embedded), it doesn't have the folder `/sys/class/gpio`. Since SysFS, and so `/sys` is a special file system, it's not possible to simply create an empty `gpio` folder.
+
+Bind mounts can only be done on existing folders, so the closest folder we can bind mount to is `/sys/class`.
+
 ## Composing a Quarterdock Environment
 A complete Quarterdock Environment consists of a minimum of three Docker containers:
 
@@ -182,13 +189,14 @@ A complete Quarterdock Environment consists of a minimum of three Docker contain
 
 This constellation of containers is composed using Docker Compose. This allows us to configure the entire environment so that it can be replecated every time.
 
-### 
-To 
+The Docker Compose setup is configured roughtly so that:
 
-- Explain how it's use to setup Quarterdock, the Stopwatch Example Application and the Stopwatch Emulated Hardware Application.
-- Point to Appendix X which shows setting up and running the example
+1. The Quarterdock container starts and sets up two `GpioFS` mount points on the host
+2. When the Quarterdock container has started, both the other containers start
+3. The Target Application starts while being exposed to one of `GpioFS` mount points via one bind mount
+4. At the same time, the Emulated Hardware Application starts and is exposed to the other `GpioFS` mount point
 
-## Virtualbox
+After this point, all of the Target Application GPIO:s are connected to the GPIO:s of the Emulated Hardware Application via Quarterdock.
 
-- Mention how Docker was run on `boot2docker` in Virtualbox to run on top of a Linux kernel, no matter the developer PC.
-- Also mention the fact it didn't have any GPIO:s, so it had no /sys/class/gpio folder. This forced me to create the folder structure `/class/gpio` myself and bind mount over the `/class` folder instead.
+### A Complete Example
+To see a description of the setup and a test run of the Stopwatch Example Application and the Stopwatch Emulated Hardware Application, see [[#Appendix Y](?)].
