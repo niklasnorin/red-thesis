@@ -4,11 +4,27 @@
 <head>
   <title>Thesis</title>
   <script src="https://obedm503.github.io/bootmark/dist/bootmark.bundle.min.js"></script>
+  <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-  <bootmark src="../common/title.md ../common/background.md ../common/aim.md 4-timeplan.md" join=" " html="{ credit: false, toc: false, theme: 'paper', prettifyTheme: 'tranquil-heart', } ">
+  <bootmark src="1-title.md"
+    join="" html="{
+      credit: false,
+      toc: false,
+      theme: 'journal'
+    }">
   </bootmark>
+
+  <div id="content">
+    <bootmark src="2-background.md 3-aim.md 4-timeplan.md"
+      join="" html="{
+        credit: false,
+        toc: false,
+        theme: 'journal'
+      }">
+    </bootmark>
+  </div>
 </body>
 
 </html>
