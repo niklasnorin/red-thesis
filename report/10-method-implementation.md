@@ -6,21 +6,21 @@ Quarterdock consists of a few moving parts:
 3. The Quarterdock control layer to configure and setup 1. and 2.
 4. A Docker template for Quarterdock Clients that overrides the default GPIOlib with Quarterdock
 
+![](/assets/10.png)
+
 ## GPIOlib Compatible FUSE Client
 
 ### Golang
 The implementation of the FUSE client was done in Golang, or just "Go" for short. Golang was created by Rob Pike and Ken Thompson at Google in 2009 [#](?). It is a compiled language that is strongly typed and garbage collected.
 
 ### go-fuse
-As has been covered before, FUSE consists of a Kernel driver and a User space library. The reference implementation of the User space library for FUSE is callsed `libfuse` and is written in C [#FUSE reference implementation](https://github.com/libfuse/libfuse). Some FUSE libraries in other programming languages wrap this library and provides a translation layer on top into the local languange [#Node FUSE binding](https://github.com/mafintosh/fuse-bindings).
+As has been covered before, FUSE consists of a Kernel driver and a User space library. The reference implementation of the User space library for FUSE is called `libfuse` and is written in C [#FUSE reference implementation](https://github.com/libfuse/libfuse). Some FUSE libraries in other programming languages wrap this library and provides a translation layer on top into the local language [#Node FUSE binding](https://github.com/mafintosh/fuse-bindings).
 
 `go-fuse` is a native implementation of the FUSE interface in Go. It does not depend on `libfuse`, but aim to implement the same functionality from scratch. According to the author, its performance is almost on par (within 5%) of the `libfuse` implementation [#go-fuse on GitHub, Hanwen](https://github.com/hanwen/go-fuse).
 
 `go-fuse` works by first telling the FUSE kernel driver to mount a certain volume and then it listens for any requests from the FUSE driver that pertains to that mount.
 
-**TODO: Insert Graph that shows how go-fuse works**
-
-### GPIOlib Compatability
+### GPIOlib Compatibility
 GPIOlib API consists of the following file-based interface:
 
 | File                    | Operations              |
@@ -38,10 +38,12 @@ The semantics and use of these has already been described in Chapter 5.
 
 Early in the implementation of Quarterdock, `go-fuse` was "forked" from the main development branch. In this new branch, `poll` was implemented.
 
-`go-fuse` already had a lot of the infrastructure in place for this. All filesystem operations are handled in a very similar way. Most of the work related to adding polling had to do with learning exactly how `go-fuse` works, and adding it in a ideomatic manner.
+`go-fuse` already had a lot of the infrastructure in place for this. All filesystem operations are handled in a very similar way. Most of the work related to adding polling had to do with learning exactly how `go-fuse` works, and adding it in a idiomatic manner.
 
 ### RpcFS
 The `go-fuse` API for a filesystem, and files in that filesystem, is quite extensive. The `FileSystem` interface contains 20+ functions and the `File` interface 10+ function any of which might, or might not, need to be implemented.
+
+![](/assets/10_1_5.png)
 
 A abstraction layer was developed to better separate the challanges related to interfacing with FUSE and those of emulating GPIO:s. That abstraction layer is called `RpcFS`, for Remote Procedual Call FileSystem.
 
@@ -69,6 +71,8 @@ This assumption does not hold true for input GPIO:s, which can change at any poi
 
 ### GpioFS
 While `RpcFS` is used to setup and interface with FUSE, `GpioFS` only concerns itself with exposing the GPIOlib interface. `GpioFS` does in fact not have any dependencies on `go-fuse` but only on `RpcFS`.
+
+![](/assets/10_1_6.png)
 
 `GpioFS` has the following responsibilities:
 
@@ -130,13 +134,13 @@ All other GPIO files, `/direction` and `/edge`, are prefixed with the `GpioFS`'s
 Although not directly related, please note again that the exported pins are local to the `GpioFS` instance. Which pins are exported (and so visible in the filesystem) are not shared between `GpioFS` instances, even if the `MemDB` is shared.
 
 ### Quarterdock
-While `GpioFS` provides the GPIOlib FUSE implementation and `MemDB` the storage, it is the Quarterdock CLI which provides an interface to the user. In addition to this, it is also the part of the application which composes a complete working system out of these components.
+While `GpioFS` provides the GPIOlib FUSE implementation and `MemDB` the storage, it is the Quarterdock CLI, Command Line Interface, which provides an interface to the user. In addition to this, it is also the part of the application which composes a complete working system out of these components.
 
-Quarterdock has a simple interface - it takes an arbitrary list of paths and sets up a GPIOlib compatible FUSE mount at these locations using `GpioFS`. All of these `GpioFS` instances share the same `MemDB`, and so the state of the pins.
+![](/assets/10_1_7.png)
+
+Quarterdock has a simple interface. It takes an arbitrary list of paths as input and sets up a GPIOlib compatible FUSE mount at these locations using `GpioFS`. All of these `GpioFS` instances share the same `MemDB`, and so the state of the pins.
 
 For example, executing the command `./quarterdock /tmp/qa /tmp/qb` would setup two GPIOlib compatible mounts, one at `/tmp/qa` and one at `/tmp/qb`. If one would list the content of those folders, you would see the `export` and `unexport` that is the signature of GPIOlib.
-
-_TODO: Insert a graph showing how Quarterdock works and the relations between two instances of GpioFS and a MemDB_
 
 ## Quarterdock Clients
 The Quarterdock CLI produces arbitrary mount points which content is compatible with GPIOlib. However, for an embedded software application to be able to use it without modification, those mounts cannot reside in any location. They have to be exactly at `/sys/class/gpio`, which is where GPIOlib is located at a Target device.
@@ -151,6 +155,8 @@ Intead, we want to find a solution where the GPIOlib compatible mounts are expos
 
 ### Docker Container and Bind Mount
 To be able to expose the two different applications, the Target Application and the Emulated Hardware Application, to two different environment we will use a combination of Docker containers and bind mounts.
+
+![](/assets/10_2_1.png)
 
 A Docker container can be used to run an application in a very controlled environment, which includes mounts. Docker provides native support to bind mount a folder from the host into the container. This exposes the content of the folders on the host to the container at a specified location. As has been mentioned before, if the folder already exists, the content is simply hidden from the container, and replaced by the content of the bind mount.
 
@@ -174,11 +180,11 @@ While the Target Application and the Emulated Hardware Application both have to 
 A strong side benefit of this also that Quarterdock can easily be built on any developers PC, as the build itself is executed inside Docker.
 
 ### Docker Machine
-Quarterdock is run using Docker Machine with VirtualBox as the virtual machine, with a small VM image called `boot2docker`.
+Quarterdock is run using Docker Machine with VirtualBox as the virtual machine, with a small VM image called `boot2docker` [[#]()].
 
 Because the `boot2docker` kernel doesn't include GPIOlib support (common for kernels that doesn't target embedded), it doesn't have the folder `/sys/class/gpio`. Since SysFS, and so `/sys` is a special file system, it's not possible to simply create an empty `gpio` folder.
 
-Bind mounts can only be done on existing folders, so the closest folder we can bind mount to is `/sys/class`.
+Bind mounts can only be done on existing folders, so the closest folder we can bind mount to is `/sys/class`. This has the downside that not only the `/sys/class/gpio` folder is replace, but it also blocks any other sub-folders of `/sys/class` to be accessed inside the container.
 
 ## Composing a Quarterdock Environment
 A complete Quarterdock Environment consists of a minimum of three Docker containers:
@@ -189,7 +195,9 @@ A complete Quarterdock Environment consists of a minimum of three Docker contain
 
 This constellation of containers is composed using Docker Compose. This allows us to configure the entire environment so that it can be replecated every time.
 
-The Docker Compose setup is configured roughtly so that:
+![](/assets/10_3.png)
+
+The Docker Compose setup is configured so that:
 
 1. The Quarterdock container starts and sets up two `GpioFS` mount points on the host
 2. When the Quarterdock container has started, both the other containers start

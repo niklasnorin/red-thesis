@@ -1,6 +1,8 @@
 # Docker
 Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [[?Docker for the Virtualization Admin, Docker, 2018-03-25](https://goto.docker.com/virtualization-admin-conf.html)]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated.
 
+![](/assets/7.png)
+
 Docker uses the analogy of houses vs. apartments. With a VM, you get a house with dedicated infrastructure. With Docker, you share the infrastructure, more like an apartment. This makes the operation and resources used by docker a lot smaller than those of a VM.
 
 While a VM uses virtualization of the hardware and contain the entire Operating System, Docker is an application delivery technology.
@@ -24,11 +26,14 @@ Docker provides a unified way to share data with Docker Containers. This include
 ### Bind mounts
 Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [[#](?)]. Bind mounts work by mounting a replica of the _source folder_ into a _target folder_. Any changes done in either folder will be replicated in the other.
 
-The way sub-mounts, mounts inside the source or target folder, works depends on what is known as bind propagation. Depending on the bind propagation setting, mounts inside either folder can be private (`private`/`rprivate`), shared one way (`slave`/`rslave`) or shared both ways (`shared`/`rshared`). This can also be applied to only those folders, or recursively (the `r` in `rshared`) to any mount inside those bind mounts.
+![](/assets/7_4_1.png)
 
 Bind mounting over an existing folder will replace the content of that folder with the content of the bind mount source. This can be done over any folder, even system folder like `/tmp` or `/sys`.
 
 Please note that the folder must exist, or be possible to create, to be the target for a bind mount.
+
+#### Propagation
+The way sub-mounts, mounts inside the source or target folder, works depends on what is known as bind propagation. Depending on the bind propagation setting, mounts inside either folder can be private (`private`/`rprivate`), shared one way (`slave`/`rslave`) or shared both ways (`shared`/`rshared`). This can also be applied to only those folders, or recursively (the `r` in `rshared`) to any mount inside those bind mounts.
 
 ## Access to Hardware
 Typically, Docker Containers do not have access to hardware because they are not run as a super user [[#](?)]. This means that it does not have the elevated access needed to do most system calls to the kernel. The upside of this is that it minimizes the risk that one container affects the environment of another container.

@@ -3,6 +3,8 @@
 ## Native Application Software Development
 Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
 
+![](/assets/2_1.png)
+
 No matter what the software a developer writes, the workflow for a compiled language is:
 
 1. Write code
@@ -16,14 +18,15 @@ The program is targeting a similar type of environment as the software developer
 ## Embedded Software Development
 From a bird-eye perspective, embedded software development might not seem to differ much from native application software development
 
+![](/assets/2_2.png)
+
 The workflow is similar:
 
 1. Write code
 2. *Cross-compile* code
-3. Move code to *target*
-4. Test code by executing it
-5. Debug any problems
-6. Repeat
+3. Test code by executing it on the target
+4. Debug any problems on the target
+5. Repeat
 
 Most modern laptops and desktops runs on x86 or amd64 processor architectures [[#](?)] while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler, or cross compiler, is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer [[#](?)].
 
@@ -34,4 +37,4 @@ Working with another target than the local computer has far reaching implication
 ### Hardware Abstraction Layer
 When working with embedded software, having some sort of Hardware Abstraction Layer, or HAL, can make the developers life easier. The main idea with a HAL is to decouple the application facing hardware interfaces from the actual hardware [[#](?)]. It makes it possible to run the same code on several platforms without having to worry about the underlying hardware being different.
 
-The opposite of using a HAL would be to access memory mapped registers directly.
+![](/assets/2_2_1.png)

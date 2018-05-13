@@ -10,10 +10,12 @@ The method that will be used to develop this architecture is to:
 3. Implement the architecture
 4. Test the architecture with the Example Software
 
-If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [#](?).
+If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [[#](?)].
 
 ## Nomenclature
-The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used in most cases.
+The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used instead.
+
+![](/assets/8_1.png)
 
 Applications which uses Quarterdock is a Quarterdock Client.
 
@@ -35,10 +37,10 @@ The Example Application will set up and access GPIO:s. It will setup both inputs
 
 The Emulated Hardware Application will stimulate the Example Application's inputs and listen to its outputs. It will do this in a way that makes it possible for the developer to interact with inputs, and see graphical representations of the outputs. It is most likely written specifically for a concrete Example Application, but it could also be more generic.
 
-*TODO: Insert figure showing the Example Application interacting with the Emulated Hardware Application*
-
-### Stopwatch Example Application
+### Stopwatch
 The concrete Example Application that will be used to evaluate the software architecture is a "stopwatch" application.
+
+![](/assets/8_2_1.png)
 
 The way this application works is that:
 
@@ -49,7 +51,6 @@ The way this application works is that:
 
 This Example Application will consist of four 7-segment displays as outputs, two for minutes and two for seconds, and two buttons as inputs. That is a total of 28 output GPIO:s and 2 input GPIO:s, with interrupts on the inputs.
 
-### Stopwatch Emulated Hardware Application
 The Emulated Hardware Application that will support the Stopwatch Example Application will have to be able to graphically represent four 7-segment displays and two buttons.
 
 The user should be able to interact with the Emulated Hardware Application without installing any additional software beyond what is needed for the software architecture.

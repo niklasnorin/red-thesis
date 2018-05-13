@@ -32,15 +32,6 @@
     counter-increment: detail;
     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
   }
-
-  #content .figure {
-    counter-increment: figure;
-    content: counter(figure);
-  }
-
-  #content img{
-    width: 100%
-  }
 }
 
 @page {

@@ -2,11 +2,11 @@
 
 The use of Linux in embedded applications is on the rise [[#](https://www.linux.com/news/embedded-linux-keeps-growing-amid-iot-disruption-says-study)].
 
-Linux as an OS has several nice properties, such as:
+Linux as an OS which is:
 
-- It's free, with no royalties or licensing fees
+- Free, with no royalties or licensing fees
 - Very thoroughly tested, at scale, for more than 25 years
-- Very powerful and configurable kernel
+- Very powerful and has a very configurable kernel
 
 Specifically for embedded software, some other nice properties include:
 
@@ -21,12 +21,16 @@ In Linux, everything is either a file or a process [[#Linus Torvalds, Mail list,
 ## Kernel space and User space
 The memory space in Linux is divided between Kernel space and User space. Kernel space is where the kernel processes executes, while User space is where all other programs and services run [[#](?)].
 
+![](/assets/5_2.png)
+
 The notion of Kernel space and User space is also used to refer to the amount of access a process has to the system. In most Linux systems, only processes running in Kernel space has access to memory mapped hardware [[#](?)]. This means that User space processes that want to access hardware always have to do so via system calls to the kernel. The kernel then in turn accesses the hardware.
 
 ## SysFS and GPIOlib for User Space GPIO Access
 While all direct hardware access is restricted to the kernel in Linux, SysFS is a generic Linux kernel facility that enables other kernel modules to expose data structures as attributes in the file system [[#](?)] at subdirectories of `/sys`.
 
 GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [[#Linux Kernel Documentation, 2018-03-25](https://www.kernel.org/doc/Documentation/gpio/sysfs.txt)].
+
+![](/assets/5_3.png)
 
 SysFS is a special filesystem which controls all folders and files underneath `/sys`. It is not possible to manually create files and folders, they are all controlled by the SysFS kernel module.
 

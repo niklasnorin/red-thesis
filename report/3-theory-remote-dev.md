@@ -5,6 +5,8 @@ For embedded developers it is often more complicated. If you are lucky, you only
 
 In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
 
+![](/assets/3.png)
+
 There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment.
 
 ## Local Development - Local Target
@@ -51,8 +53,4 @@ Online word processors, such as Google Documents, have been available for a whil
 
 Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.
 
-One downside to this is that there is not a lot of widespread adopted browser support to communicate directly with hardware. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed. However, there are some initiatives to overcome this to, for example, be able to use USB devices from the browser [#USB in browser](?).
-
-Table of comparison
--------------------
-_Consider creating a table for easy comparison of the above development environments._
+One downside to this is that there is not a lot of widespread adopted browser support to communicate directly with hardware, most likely due to security concerns. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed. However, there are some initiatives to overcome this, for example, be able to use USB devices from the browser [#USB in browser](?).

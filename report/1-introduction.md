@@ -12,9 +12,11 @@ The aim of this thesis is to define and, in part, implement, a suggestion for an
 The architecture itself will be developed with the latest advances in mind, in everything from scalable software containers to combined MCU-FPGA systems. The intention is to come up with an architecture that covers the most common use-cases of modern embedded software development and one that can scale from one remote developer to thousands.
 
 ## Purpose
-Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit connected to a PC. 
+Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit connected to a PC.
 
 This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
+
+![](/assets/1_2.png)
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:
