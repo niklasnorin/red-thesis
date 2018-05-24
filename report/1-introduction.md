@@ -51,5 +51,7 @@ The instrumentation and hardware emulation in this thesis focuses on digital emu
 ## Abbreviations and Acronyms
 
 **GPIO** - General Purpose Input Output
+
 **FUSE** - Filesystem in Userspace. Also the name of the actual kernel driver.
+
 **Target** - The real embedded hardware which is the target platform for embedded software.
