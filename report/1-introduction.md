@@ -48,20 +48,6 @@ This setup means that the exact same code can be executed both on a PC and the t
 ### Digital Signals
 The instrumentation and hardware emulation in this thesis focuses on digital emulation of signals and communication channels.
 
-## Tools
-
-*TODO*
-- Add hardware that will be used in the hardware demo
-- The tools needed to reproduce what's in this thesis (software & hardware)
-
-## Source Code
-*TODO*
-- Decide what do to with the source code
-
-It has yet to be decided if the source code which was written as a part of this work will be released as open-source after the publication of this thesis.
-
-The frameworks, concepts and libraries used in the solution are thoroughly documented.
-
 ## Abbreviations and Acronyms
 
 **GPIO** - General Purpose Input Output
