@@ -16,7 +16,7 @@ Working with embedded software development traditionally means having access to 
 
 This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
 
-![](/assets/1_2.png)
+![](/thesis/report/assets/1_2.png)
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:

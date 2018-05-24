@@ -5,7 +5,7 @@ For embedded developers it is often more complicated. If you are lucky, you only
 
 In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
 
-![](/assets/3.png)
+![](/thesis/report/assets/3.png)
 
 There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment.
 

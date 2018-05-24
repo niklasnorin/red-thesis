@@ -3,7 +3,7 @@
 ## Native Application Software Development
 Traditionally, one of the most wide-spread applications are software application which run natively on a PC. These can be word processors, card games or massive industrial process management software suites.
 
-![](/assets/2_1.png)
+![](/thesis/report/assets/2_1.png)
 
 No matter what the software a developer writes, the workflow for a compiled language is:
 
@@ -18,7 +18,7 @@ The program is targeting a similar type of environment as the software developer
 ## Embedded Software Development
 From a bird-eye perspective, embedded software development might not seem to differ much from native application software development
 
-![](/assets/2_2.png)
+![](/thesis/report/assets/2_2.png)
 
 The workflow is similar:
 
@@ -37,4 +37,4 @@ Working with another target than the local computer has far reaching implication
 ### Hardware Abstraction Layer
 When working with embedded software, having some sort of Hardware Abstraction Layer, or HAL, can make the developers life easier. The main idea with a HAL is to decouple the application facing hardware interfaces from the actual hardware [[#](?)]. It makes it possible to run the same code on several platforms without having to worry about the underlying hardware being different.
 
-![](/assets/2_2_1.png)
+![](/thesis/report/assets/2_2_1.png)

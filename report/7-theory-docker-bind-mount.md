@@ -1,7 +1,7 @@
 # Docker
 Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [[?Docker for the Virtualization Admin, Docker, 2018-03-25](https://goto.docker.com/virtualization-admin-conf.html)]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated.
 
-![](/assets/7.png)
+![](/thesis/report/assets/7.png)
 
 Docker uses the analogy of houses vs. apartments. With a VM, you get a house with dedicated infrastructure. With Docker, you share the infrastructure, more like an apartment. This makes the operation and resources used by docker a lot smaller than those of a VM.
 
@@ -26,7 +26,7 @@ Docker provides a unified way to share data with Docker Containers. This include
 ### Bind mounts
 Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [[#](?)]. Bind mounts work by mounting a replica of the _source folder_ into a _target folder_. Any changes done in either folder will be replicated in the other.
 
-![](/assets/7_4_1.png)
+![](/thesis/report/assets/7_4_1.png)
 
 Bind mounting over an existing folder will replace the content of that folder with the content of the bind mount source. This can be done over any folder, even system folder like `/tmp` or `/sys`.
 
