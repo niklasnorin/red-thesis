@@ -15,7 +15,7 @@ If the Example Software is considered a test, then this is similar to a Test Dri
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used instead.
 
-![](/thesis/report/assets/8_1.png)
+![](assets/8_1.png)
 
 Applications which uses Quarterdock is a Quarterdock Client.
 
@@ -40,7 +40,7 @@ The Emulated Hardware Application will stimulate the Example Application's input
 ### Stopwatch
 The concrete Example Application that will be used to evaluate the software architecture is a "stopwatch" application.
 
-![](/thesis/report/assets/8_2_1.png)
+![](assets/8_2_1.png)
 
 The way this application works is that:
 

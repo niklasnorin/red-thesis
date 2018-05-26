@@ -6,7 +6,7 @@ Quarterdock consists of a few moving parts:
 3. The Quarterdock control layer to configure and setup 1. and 2.
 4. A Docker template for Quarterdock Clients that overrides the default GPIOlib with Quarterdock
 
-![](/thesis/report/assets/10.png)
+![](assets/10.png)
 
 ## GPIOlib Compatible FUSE Client
 
@@ -43,7 +43,7 @@ Early in the implementation of Quarterdock, `go-fuse` was "forked" from the main
 ### RpcFS
 The `go-fuse` API for a filesystem, and files in that filesystem, is quite extensive. The `FileSystem` interface contains 20+ functions and the `File` interface 10+ function any of which might, or might not, need to be implemented.
 
-![](/thesis/report/assets/10_1_5.png)
+![](assets/10_1_5.png)
 
 A abstraction layer was developed to better separate the challanges related to interfacing with FUSE and those of emulating GPIO:s. That abstraction layer is called `RpcFS`, for Remote Procedual Call FileSystem.
 
@@ -72,7 +72,7 @@ This assumption does not hold true for input GPIO:s, which can change at any poi
 ### GpioFS
 While `RpcFS` is used to setup and interface with FUSE, `GpioFS` only concerns itself with exposing the GPIOlib interface. `GpioFS` does in fact not have any dependencies on `go-fuse` but only on `RpcFS`.
 
-![](/thesis/report/assets/10_1_6.png)
+![](assets/10_1_6.png)
 
 `GpioFS` has the following responsibilities:
 
@@ -136,7 +136,7 @@ Although not directly related, please note again that the exported pins are loca
 ### Quarterdock
 While `GpioFS` provides the GPIOlib FUSE implementation and `MemDB` the storage, it is the Quarterdock CLI, Command Line Interface, which provides an interface to the user. In addition to this, it is also the part of the application which composes a complete working system out of these components.
 
-![](/thesis/report/assets/10_1_7.png)
+![](assets/10_1_7.png)
 
 Quarterdock has a simple interface. It takes an arbitrary list of paths as input and sets up a GPIOlib compatible FUSE mount at these locations using `GpioFS`. All of these `GpioFS` instances share the same `MemDB`, and so the state of the pins.
 
@@ -156,7 +156,7 @@ Intead, we want to find a solution where the GPIOlib compatible mounts are expos
 ### Docker Container and Bind Mount
 To be able to expose the two different applications, the Target Application and the Emulated Hardware Application, to two different environment we will use a combination of Docker containers and bind mounts.
 
-![](/thesis/report/assets/10_2_1.png)
+![](assets/10_2_1.png)
 
 A Docker container can be used to run an application in a very controlled environment, which includes mounts. Docker provides native support to bind mount a folder from the host into the container. This exposes the content of the folders on the host to the container at a specified location. As has been mentioned before, if the folder already exists, the content is simply hidden from the container, and replaced by the content of the bind mount.
 
@@ -195,7 +195,7 @@ A complete Quarterdock Environment consists of a minimum of three Docker contain
 
 This constellation of containers is composed using Docker Compose. This allows us to configure the entire environment so that it can be replecated every time.
 
-![](/thesis/report/assets/10_3.png)
+![](assets/10_3.png)
 
 The Docker Compose setup is configured so that:
 

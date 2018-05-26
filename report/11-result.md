@@ -1,6 +1,6 @@
 # Result
 
-![](/thesis/report/assets/11.png)
+![](assets/11.png)
 
 This thesis has shown that it is possible to create an artificial environment where an embedded software application can interract with GPIO hardware via the SysFS GPIOlib API as if they were present. Using this artificial environment, a developer can develop, and test, embedded software applications that rely on GPIO interactions on a regular PC, without having access to the physical Target device. The embedded software application can do this, and then be run without modification on the Target device.
 

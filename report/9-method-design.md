@@ -1,7 +1,7 @@
 # Designing Quarterdock
 The main goal of Quarterdock is to create an environment where an application targeting an embedded Linux application can run without modification.
 
-![](/thesis/report/assets/9.png)
+![](assets/9.png)
 
 This means that, in this environment, the application will find that interacting with hardware works as if it was running on the real target.
 
