@@ -1,7 +1,8 @@
 # Discussion
+
 The work presented in this thesis is very relevant given the existing popularity, and the rising trend, of embedded devices running Linux. It enables developers to run embedded software without running it on the Target device, which could help to shorten development time.
 
-Being able to programatically stimulate inputs and read outputs is exactly what is needed to, for example, automatically run integration tests on code for every code change. This reduces the chances of regression bugs and gives the developer more confidence to change legacy code. Being able to control inputs programatically also allows for parameterized testing in ways not possible before. Questions such as "What happens if I press the button with 10, 100, 200, 300, 400, 500ms interval?" are suddenly a lot easier to answer.
+Being able to programmatically stimulate inputs and read outputs is exactly what is needed to, for example, automatically run integration tests on code for every code change. This reduces the chances of regression bugs and gives the developer more confidence to change legacy code. Being able to control inputs programmatically also allows for parameterized testing in ways not possible before. Questions such as "What happens if I press the button with 10, 100, 200, 300, 400, 500ms interval?" are suddenly a lot easier to answer.
 
 That said, the solution presented in this thesis is just a stepping stone. Due to scope and time limitations, it only implements a small subset of what the architecture itself allows.
 
@@ -34,6 +35,11 @@ This could potentially be fixed by creating a empty SysFS kernel module which ex
 
 Note that if Quarterdock is used on a embedded Target device, then bind mounting directly to `/sys/class/gpio` is possible, since it would include GPIOlib support.
 
+### Add support for new GPIO character device API
+The SysFS GPIOLib driver is deprecated and replaced by a GPIO character driver [@gpio-character-driver]. The new driver offer several improvements of the existing driver.
+
+
+
 ### Support More Hardware Interfaces
 It is conceivable that the same principle used to emulate GPIO:s in this work could be extended to support emulating other types of hardware access as well. Since everything is a file in Linux, supporting emulating SPI, I2C, UART and more should be possible.
 
@@ -47,7 +53,7 @@ A solution to this could be to pass the UID, User ID, and GID, Group ID, of user
 ### Performance of FUSE
 FUSE can be slow or fast to use depending on the use-case [[#](https://www.usenix.org/system/files/conference/fast17/fast17-vangoor.pdf)], but no benchmarking has been done as part of this thesis.
 
-Writing to GPIO:s goes through several layers of kernel code, but so does FUSE. It would be interesting to do future work to characterize exactly what kind of latencies there are between Quaterdock Clients.
+Writing to GPIO:s goes through several layers of kernel code, but so does FUSE. It would be interesting to do future work to characterize exactly what kind of latencies there are between Quarterdock Clients.
 
 ### Run as Native SysFS Linux Kernel Module Driver
 Instead of using FUSE, it could be possible to create a native SysFS module which contains logic for:
@@ -56,7 +62,7 @@ Instead of using FUSE, it could be possible to create a native SysFS module whic
 2. Support mapping the GPIO:s in these folders to each other
 3. Support "GPIO passthrough" to write to the real GPIO:s
 
-This module would be exposed not in `/sys/class/gpio`, but for example in `/sys/class/gpio-emu` to not clash with GPIOlib. The later could still be exposed to the application at `/sys/class/gpio` using the same bind-mounting in Docker techniqiue that was used with Quarterdock.
+This module would be exposed not in `/sys/class/gpio`, but for example in `/sys/class/gpio-emu` to not clash with GPIOlib. The later could still be exposed to the application at `/sys/class/gpio` using the same bind-mounting in Docker technique that was used with Quarterdock.
 
 This would probably be faster than FUSE. However, it would require the the development of a custom kernel module. Also, if any decisions or routing should be dynamically configurable in User space, then it would still require a Kernel module to User space interface, something that FUSE already provides as part of its implementation.
 

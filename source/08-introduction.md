@@ -1,11 +1,11 @@
 # Introduction
 
 ## Background
-The traditional definition of a personal work place as a desk in a cubical is slowly, but surely, on its way to be a thing of the past. The amount of people working remotely, both self-employed and not, has literally exploded in the wake of the dramatic increase of widely available, often free, internet connectivity. 3.7 Million people in the U.S. is already working remotely at least half of the time (US Census Bureau) and working from home among non-self-employed is up more than 100% since 2005. When given the choice, as many as 80-90% of the US workforce said that they would choose to do so if they could.
+The traditional definition of a personal work place as a desk in a cubical is slowly, but surely, on its way to be a thing of the past. The amount of people working remotely, both self-employed and not, has literally exploded in the wake of the dramatic increase of widely available, often free, internet connectivity. More than 13.4 Million people in the U.S. is already working remotely at least one day a week [@us-census-home-workers], representing almost 10% of the working population.
 
 The ability to work remotely is very much decided on what kind of work you do. Most non-self-employed people who work remotely today only need access to a computer to get their work done. In the engineering work community, working remotely is no impediment in areas such as architecture, electronic CAD or in most software development roles. The more dependent you are on having access to other tools than your computer however, the less likely you are to be able to work remotely, even if that would be desirable both for the employee and employer.
 
-Within the area of electrical engineering, embedded software development is just one area of engineering that very often rely heavily on other tools than just a computer. It comes with the territory, working with electronics is bound to put you in front of a logic analyzer as well as one development board or another some day. The more hardware and tools, the less the likelihood of being able to work remotely or, at the very least, increased friction of starting to do so. Dragging kits and equipments to and from work is not only tedious, it also brings with it the risk of physical breakage or ESD related damages of both hardware and tools. In addition, not everyone has the option of having a permanent electronics lab at home, so starting to work often means setting everything up and wrapping it up means packing it all up again.
+Within the area of electrical engineering, embedded software development is a line of work that very often rely heavily on other tools than just a computer. It comes with the territory, working with electronics is bound to put you in front of a logic analyzer as well as one development board or another some day. The more hardware and tools, the less the likelihood of being able to work remotely or, at the very least, increased friction of starting to do so. Dragging kits and equipments to and from work is not only tedious, it also brings with it the risk of physical breakage or ESD related damages of both hardware and tools. In addition, not everyone has the option of having a permanent electronics lab at home, so starting to work often means setting everything up and wrapping it up means packing it all up again.
 
 The aim of this thesis is to define and, in part, implement, a suggestion for an architecture that would enable embedded software developers to remotely develop, debug and test real embedded software. This thesis will peer into existing work, look into the pros and cons of emulation versus real hardware, take a deep-dive into developing and debugging SW on a remote target as well as looking into how to stimulate inputs and view outputs remotely. It will also take a look into attaching virtual tools to the target, such as logic analyzers or serial port emulators.
 
@@ -16,7 +16,7 @@ Working with embedded software development traditionally means having access to 
 
 This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that access hardware, without access to physical hardware.
 
-![](assets/1_2.png)
+![Development without access to hardware \label{1_2}](source/figures/1_2.png)
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:
@@ -39,7 +39,7 @@ The solution that this thesis sets out to design will focus on replacing local d
 Working with remote targets are described in the theory part of the thesis though, this to provide a more comprehensive picture of the options available to developers today.
 
 ### Processor Architecture
-Most embedded systems uses the ARM architecture [[#](?)], while most computers used by developers are x86 or AMD64 [[#](?)]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
+Many embedded systems uses the ARM architecture [@arm-roadshow-slides], while most computers used by developers are x86 [@ee-time-x86-marketshare]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
 
 Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a so called interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parse and executes the code on the fly.
 

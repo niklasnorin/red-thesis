@@ -10,12 +10,12 @@ The method that will be used to develop this architecture is to:
 3. Implement the architecture
 4. Test the architecture with the Example Software
 
-If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [[#](?)].
+If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [#].
 
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used instead.
 
-![](assets/8_1.png)
+![Quarterdock overview \label{8_1}](source/figures/8_1.png)
 
 Applications which uses Quarterdock is a Quarterdock Client.
 
@@ -40,7 +40,7 @@ The Emulated Hardware Application will stimulate the Example Application's input
 ### Stopwatch
 The concrete Example Application that will be used to evaluate the software architecture is a "stopwatch" application.
 
-![](assets/8_2_1.png)
+![The Stopwatch Quarterdock application \label{8_2_1}](source/figures/8_2_1.png)
 
 The way this application works is that:
 

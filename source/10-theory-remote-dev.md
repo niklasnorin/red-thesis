@@ -1,11 +1,12 @@
 # Remote Embedded Software Development
+
 When working with native application software the developer is bringing the targeted platform for his application with him wherever he takes his computer. No need to worry about additional hardware, instruments or lab equipment. With a laptop and an internet connection, it is possible to efficiently work on almost any native application from anywhere.
 
 For embedded developers it is often more complicated. If you are lucky, you only need a single development board with a single USB-cable. In this simple case, you only need a padded ESD bag and you're good to go.
 
 In many cases, taking the system to-go simply not an option because of size of the system, because of the instrumentation needed or because it's not possible to test it on the real system at all. It's simply not feasible to travel around with a huge motor if you're writing a motor controller or test code again and again in a real environment if you're making a rocket engine.
 
-![](assets/3.png)
+![Different embedded software development setups \label{3}](source/figures/3.png)
 
 There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment.
 
@@ -23,7 +24,7 @@ Cross-compiling is done on the developers computer, the resulting binaries are t
 When it comes to testing the application on the target on a system level, the developer can in many cases simply lean over to press a button and observe if he sees the appropriate behavior. If it is not the desired behavior, then the code is changed and the process is repeated again.
 
 ## Local Development with Remote Target
-Many modern development environments use Internet Protocol, IP, related technology to flash and debug embedded targets [[#](?)]. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network [[#](?)].
+Many modern development environments use Internet Protocol, IP, related technology to flash and debug embedded targets [@gdb]. This means that there is no theoretical limitation to only accessing these targets locally. Any target available via Ethernet on the local network can easily be configured to be available remotely via a VPN, Virtual Private Network.
 
 This means that the local development environment can be the same, with the same compiler, debugging tools etc. being used as with a local target.
 
@@ -35,7 +36,7 @@ Similarly, having a remote target is also not very efficient when it comes to in
 
 Another element of embedded software development not to be neglected is that to reset the target to a known state, it's often necessary to power cycle the system or disconnected and reconnect a cable. While this is very easy when the system is locally available, this might not be possible when working with a remote target.
 
-With all this being said, there has been tremendous progress is remotely deploy embedded software. Services such as Resin.io [[#](?)] makes it possible to deploy almost any code written locally to a remote target.
+With all this being said, there has been tremendous progress is remotely deploy embedded software. Services such as Resin.io [@resin] makes it possible to deploy almost any code written locally to a remote target.
 
 ## Remote Desktop
 A third option to working with a complicated hardware setup remotely is via a remote desktop software. Remote desktop software works by sharing the screen, mouse and keyboard remotely over the internet with another computer. The computer which desktop is being shared is referred to as the server, and the computer accessing it the client. When connected, the client can work as if sitting in from of the server computer.
