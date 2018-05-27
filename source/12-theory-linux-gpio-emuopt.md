@@ -28,7 +28,7 @@ The notion of Kernel space and User space is also used to refer to the amount of
 ## SysFS and GPIOlib for User Space GPIO Access
 While all direct hardware access is restricted to the kernel in Linux, SysFS is a generic Linux kernel facility that enables other kernel modules to expose data structures as attributes in the file system [@sysfs] at subdirectories of `/sys`.
 
-GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [@gpiofs].
+GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [@gpiolib].
 
 ![SysFS and GPIOlib \label{5_3}](source/figures/5_3.png)
 

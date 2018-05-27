@@ -38,8 +38,6 @@ Note that if Quarterdock is used on a embedded Target device, then bind mounting
 ### Add support for new GPIO character device API
 The SysFS GPIOLib driver is deprecated and replaced by a GPIO character driver [@gpio-character-driver]. The new driver offer several improvements of the existing driver.
 
-
-
 ### Support More Hardware Interfaces
 It is conceivable that the same principle used to emulate GPIO:s in this work could be extended to support emulating other types of hardware access as well. Since everything is a file in Linux, supporting emulating SPI, I2C, UART and more should be possible.
 
