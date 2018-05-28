@@ -27,6 +27,9 @@ Figure 10.4  A Quarterdock instance given two paths                           \h
 Figure 10.5  Bind mounting two different GPIOlib folders...                   \hfill{53}  
 Figure 10.6  Creating and running a complete Quarterdock environment...       \hfill{55}  
 Figure 11.1  Quarterdock                                                      \hfill{57}  
+Figure 13.1  The Stopwatch Example                                            \hfill{65}  
+Figure 13.2  Starting and stopping the stopwatch                              \hfill{66}  
+
 
 \pagenumbering{roman}
 \setcounter{page}{3}

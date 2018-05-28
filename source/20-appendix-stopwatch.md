@@ -1,11 +1,32 @@
 # Appendix A - Evaluation Software Implementation
 
-*TODO:*
+The Stopwatch Example produces as part of this thesis consisted of two parts:
 
-- Write some about the implementation of the evaluation software
-- Justify running it as web server (no dependencies)
-- Insert architecture overview
-- Insert code snippets for listening for interrupts
-- Insert graph showing how a button press propagates to the application
-- Insert graph showing how the LED is updated from the application
+1. The Stopwatch Application itself
+2. The Emulated Hardware Application which emulates the buttons and he 7-segment displays
 
+The example was written in Python using python-periphery [@python-periphery] for convenience, instead of using direct file writes.
+
+![The Stopwatch Example \label{a_1}](source/figures/appendix_a_1.png)
+
+## Stopwatch Application
+The main application was implemented as a simple single-file python application that:
+
+1. Listens for GPIO input interrupts on the Start/Stop button or Reset button
+2. Reacts to the button press, starting, stopping or pausing the count
+3. For every time the count changes, it updates all the output GPIO's controlling the 7-segment displays representing the count
+
+## Stopwatch Emulated Hardware Application
+The application which emulates the connected hardware. It both handles the GPIO interface, and has a web-server which the user connects to when he wants to control the stopwatch.
+
+![Starting and stopping the stopwatch \label{a_2}](source/figures/appendix_a_2.png)
+
+The web-interface has two buttons, Start/Stop and Reset, and shows all the 7-segment displays of the Stopwatch.
+
+The application:
+
+1. Listens for incoming requests to access the stopwatch web-interface
+2. Listens for the user to click a button on the web-interface, generating a change in the GPIO output value 
+3. Listen for GPIO input interrupts on all the individual segments in the 7-segment displays
+
+Together, the two applications illustrate how Quarterdock can be used to both create an environment where an application think real hardware is available, and to emulate the other side of that hardware.

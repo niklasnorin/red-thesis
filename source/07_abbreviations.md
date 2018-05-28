@@ -1,8 +1,8 @@
 # Abbreviations {.unnumbered}
 
 \begin{tabbing}
-\textbf{API}~~~~~~~~~~~~ \= \textbf{A}pplication \textbf{P}rogramming \textbf{I}nterface \\  
-\textbf{JSON} \> \textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation \\  
+\textbf{FUSE}~~~~~~~~~~~~ \= \textbf{F}ilesystem in \textbf{USE}r space \\  
+\textbf{GPIO} \> \textbf{G}eneral \textbf{P}urpose \textbf{I}nput \textbf{O}utput \\  
 \end{tabbing}
 
 \newpage
