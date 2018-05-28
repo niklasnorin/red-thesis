@@ -64,31 +64,31 @@ There are multiple ways to emulate hardware, or trick an application to think th
 ### Duplicating SysFS with Regular Files
 Because everything is a file in Linux, standard `read` or `write` operations are used and for many operations these cannot distinguish a regular persistent file from a file that is mapped to hardware. This means that by replicating the GPIOlib file structure with regular persistent files is possible in some cases.
 
-Linux also contains an API for listening for changes in files called `inotify` [#Linux Programmer's Manual, Michael Kerrisk - Linux man-pages maintainer, 2018-04-02](http://man7.org/linux/man-pages/man7/inotify.7.html)]. This can be used to listen to if there is new data available to read or if it is possible to write to a file.
+Linux also contains an API for listening for changes in files called `inotify` [@inotify]. This can be used to listen to if there is new data available to read or if it is possible to write to a file.
 
 ### LD_PRELOAD
 Dynamically linked application are linked with libraries at runtime instead of at compile time. LD_PRELOAD is an environmental variable picked up by Linux dynamic linker that allows the developer to override the symbol of any dynamically linked library. Used creatively, this can be used to emulate hardware.
 
-Using LD_PRELOAD to wrap calls to file operations such as `read`, `write` and `ioctl`, it's possible to intercept and modify specific calls. This could be used to only intercept `ioctl` directed towards a SPI driver path, all others are passed down to the *real* `ioctl` and the kernel. One application that implements this is umockdev [[#GitHub umockdev, 2018-03-25](https://github.com/martinpitt/umockdev)].
+Using LD_PRELOAD to wrap calls to file operations such as `read`, `write` and `ioctl`, it's possible to intercept and modify specific calls. This could be used to only intercept `ioctl` directed towards a SPI driver path, all others are passed down to the *real* `ioctl` and the kernel. One application that implements this is umockdev [@umockdev].
 
 ### Linux Kernel Driver
 The ways the GPIO drivers are exposed to User space opens up multiple options for emulating GPIO hardware in Linux.
 
 #### Custom GPIO Driver
-At the bottom most layer is the GPIO driver itself. On real hardware, this would typically write and read to the memory mapped registers of the physical GPIO module in a CPU. This module lets the kernel know exactly how to configure GPIO:s, and their capabilities [#].
+At the bottom most layer is the GPIO driver itself. On real hardware, this would typically write and read to the memory mapped registers of the physical GPIO module in a CPU. This module lets the kernel know exactly how to configure GPIO:s, and their capabilities [@gpiodriver].
 
 It would be possible to write a Linux driver that would pretend it is a GPIO driver. This "fake" GPIO driver would then be automatically detected by GPIOlib and would automatically expose a standard interface via SysFS using the build in SysFS support. 
 
 Any writes to e.g. `/sys/class/gpio/gpio1/value` would actually be handled by the custom GPIO driver.
 
 #### Custom SysFS Driver
-GPIOlib works by inspecting all GPIO drivers and then uses SysFS to expose those GPIO:s via its standard SysFS User space file system [#].
+GPIOlib works by inspecting all GPIO drivers and then uses SysFS to expose those GPIO:s via its standard SysFS User space file system.
 
 One alternative to writing a GPIO driver, would be to implement a custom version of GPIOlib. This would expose the exact same interface as GPIOlib via SysFS, but it would not interact with any real GPIO drivers in any way. Instead of searching for GPIO drivers, it could expose anything it wants via SysFS and handle incoming requests in any way it wants.
 
 This allows reuse of the infrastructure of SysFS which makes it easy to expose "properties" as files, without implementing a full filesystem from scratch.
 
 #### Custom Linux filesystem
-Linux uses a standardized filesystem model called VFS, or the Virtual File System [#]. The VFS forwards any filesystem requests to the filesystem driver mounted at a specific location.
+Linux uses a standardized filesystem model called VFS, or the Virtual File System [@vfs]. The VFS forwards any filesystem requests to the filesystem driver mounted at a specific location.
 
-Creating a Linux filesystem driver would allow to expose any filesystem interface. This is how SysFS is implemented [#].
+Creating a Linux filesystem driver would allow to expose any filesystem interface. This is how SysFS is implemented [@sysfs].

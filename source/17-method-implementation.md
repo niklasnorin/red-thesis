@@ -11,17 +11,19 @@ Quarterdock consists of a few moving parts:
 ## GPIOlib Compatible FUSE Client
 
 ### Golang
-The implementation of the FUSE client was done in Golang, or just "Go" for short. Golang was created by Rob Pike and Ken Thompson at Google in 2009 [#](?). It is a compiled language that is strongly typed and garbage collected.
+The implementation of the FUSE client was done in Golang, or just "Go" for short. Golang was created by Rob Pike and Ken Thompson at Google in 2009 [@go-history]. It is a compiled language that is strongly typed and garbage collected.
 
 ### go-fuse
-As has been covered before, FUSE consists of a Kernel driver and a User space library. The reference implementation of the User space library for FUSE is called `libfuse` and is written in C [#FUSE reference implementation](https://github.com/libfuse/libfuse). Some FUSE libraries in other programming languages wrap this library and provides a translation layer on top into the local language [#Node FUSE binding](https://github.com/mafintosh/fuse-bindings).
+As has been covered before, FUSE consists of a Kernel driver and a User space library. The reference implementation of the User space library for FUSE is called `libfuse` and is written in C [@libfuse]. Some FUSE libraries in other programming languages wrap this library and provides a translation layer on top into the local language [@fuse-node].
 
-`go-fuse` is a native implementation of the FUSE interface in Go. It does not depend on `libfuse`, but aim to implement the same functionality from scratch. According to the author, its performance is almost on par (within 5%) of the `libfuse` implementation [#go-fuse on GitHub, Hanwen](https://github.com/hanwen/go-fuse).
+`go-fuse` is a native implementation of the FUSE interface in Go. It does not depend on `libfuse`, but aim to implement the same functionality from scratch. According to the author, its performance is almost on par (within 5%) of the `libfuse` implementation [@go-fuse].
 
 `go-fuse` works by first telling the FUSE kernel driver to mount a certain volume and then it listens for any requests from the FUSE driver that pertains to that mount.
 
 ### GPIOlib Compatibility
 GPIOlib API consists of the following file-based interface:
+
+: GPIOlib API operations
 
 | File                    | Operations              |
 | ----------------------- | ----------------------- |
@@ -58,12 +60,12 @@ None of these functions are implemented by `RpcFS`, it simply intercepts the und
 `RpcFS` also takes care of the logic related to setting up the mount volume, navigating through the folder structure created by the paths, returning fixed sizes for files and more.
 
 #### Fixed File Size
-To keep with the interface of SysFS, the size of all files are set to fixed size of 4096 bytes, or one i386 "page". This is done so that all data can be read and written by passing a single 4096 byte buffer [[#SysFS Kernel Documentation, Kernel.org](https://www.kernel.org/doc/Documentation/filesystems/sysfs.txt)]. This is also something `RpcFS` does without any special configuration.
+To keep with the interface of SysFS, the size of all files are set to fixed size of 4096 bytes, or one i386 "page". This is done so that all data can be read and written by passing a single 4096 byte buffer [@sysfs]. This is also something `RpcFS` does without any special configuration.
 
 When a client issues a `read`, what happens is that X amount of bytes is returned, and then the next call returns that it read zero bytes, a signal that there is no more data to be read.
 
 #### Bypassing the Page Cache
-When opening a file, the Kernel normally opens it in a buffered mode [[#Linux Programmer's Manual - Open, Michael Kerrisk - Linux man-pages maintainer](http://man7.org/linux/man-pages/man2/open.2.html)]. In this mode, Linux assumes that since a file cannot change in between a filesystem write and a read and is free to cache any reads to any filesystem. This means that if you read a file twice, it might issue a read request to the filesystem the first time, but the second time it might return the a cached result of the first read.
+When opening a file, the Kernel normally opens it in a buffered mode [@linux-open]. In this mode, Linux assumes that since a file cannot change in between a filesystem write and a read and is free to cache any reads to any filesystem. This means that if you read a file twice, it might issue a read request to the filesystem the first time, but the second time it might return the a cached result of the first read.
 
 This assumption does not hold true for input GPIO:s, which can change at any point in time. A first read might yield a `0` while the second read might yield a `1`, all depending on behavior external to the Kernel and the filesystem.
 
@@ -165,7 +167,7 @@ This technique can be used to e.g. make the `/tmp/qa` folder appear at `/sys/cla
 #### Bind Mount Propagation
 When using Quarterdock in Docker, we are using mounts within mounts. First, a folder from the Host OS is bind mounted into the Docker container. Inside this folder is the FUSE mount that is created by Quarterdock.
 
-By default new mounts within the bind mounted volume are not propagated to the target folder inside the Docker container [[#Docker Bind Mounts, Docker](https://docs.docker.com/storage/bind-mounts/#configure-bind-propagation)]. For Quarterdock, by default, this would mean that while the folder containing the quarterdock mount is available to the container, the mount itself is not.
+By default new mounts within the bind mounted volume are not propagated to the target folder inside the Docker container [@docker-bind-mount-propagation]. For Quarterdock, by default, this would mean that while the folder containing the quarterdock mount is available to the container, the mount itself is not.
 
 To solve this the Quarterdock folders needs to be mounted with `rshared`. This means that any mount already mounted, or that gets mounted in the future, in the bind mounted folder, is propagated to the container.
 
@@ -180,7 +182,7 @@ While the Target Application and the Emulated Hardware Application both have to 
 A strong side benefit of this also that Quarterdock can easily be built on any developers PC, as the build itself is executed inside Docker.
 
 ### Docker Machine
-Quarterdock is run using Docker Machine with VirtualBox as the virtual machine, with a small VM image called `boot2docker` [[#]()].
+Quarterdock is run using Docker Machine with VirtualBox as the virtual machine, with a small VM image called `boot2docker` [@https://github.com/boot2docker/boot2docker].
 
 Because the `boot2docker` kernel doesn't include GPIOlib support (common for kernels that doesn't target embedded), it doesn't have the folder `/sys/class/gpio`. Since SysFS, and so `/sys` is a special file system, it's not possible to simply create an empty `gpio` folder.
 
@@ -207,4 +209,4 @@ The Docker Compose setup is configured so that:
 After this point, all of the Target Application GPIO:s are connected to the GPIO:s of the Emulated Hardware Application via Quarterdock.
 
 ### A Complete Example
-To see a description of the setup and a test run of the Stopwatch Example Application and the Stopwatch Emulated Hardware Application, see [[#Appendix Y](?)].
+To see a description of the setup and a test run of the Stopwatch Example Application and the Stopwatch Emulated Hardware Application, see Appendix A.

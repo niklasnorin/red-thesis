@@ -49,7 +49,7 @@ The FUSE kernel driver defaults to only allowing the process and user who create
 A solution to this could be to pass the UID, User ID, and GID, Group ID, of users that should have access to Quarterdock. Quarterdock could then use the FUSE context, that is passed with every FUSE request, to check the user agains an access list.
 
 ### Performance of FUSE
-FUSE can be slow or fast to use depending on the use-case [[#](https://www.usenix.org/system/files/conference/fast17/fast17-vangoor.pdf)], but no benchmarking has been done as part of this thesis.
+FUSE can be slow or fast to use depending on the use-case [@fuse-speed], but no benchmarking has been done as part of this thesis.
 
 Writing to GPIO:s goes through several layers of kernel code, but so does FUSE. It would be interesting to do future work to characterize exactly what kind of latencies there are between Quarterdock Clients.
 

@@ -2,7 +2,7 @@
 
 FUSE, short for Filesystems in USEr space, offers yet another potentially powerful way to emulate GPIO access in Linux.
 
-The power of FUSE lies in that it enables the creation of custom filesystems without creating dedicated kernel modules for each filesystem [#]. Moreover, all of this is available to the normal user of the system, no super user, or "root", access is required.
+The power of FUSE lies in that it enables the creation of custom filesystems without creating dedicated kernel modules for each filesystem [@libfuse]. Moreover, all of this is available to the normal user of the system, no super user, or "root", access is required.
 
 ![Regular filesystem access \label{6_0_1}](source/figures/6_0_1.png)
 
@@ -18,7 +18,7 @@ A mounted FUSE filesystem is normally only available to the user that mounted th
 ## Example: Encrypted filesystem
 How FUSE works, and how it could be useful, could easily be illustrated with EncFS.
 
-EncFS [#] is a command-line tool which takes two arguments, a `RootDirectory` and a `MountDirectory`. When run, it will create a new mount point at the `MountDirectory`. Any writes to this directory, such as creating a new file, will be intercepted, encrypted, and store in its encrypted form in `RootDirectory`. Whenever a file is read, it will first be decrypted and then returned. For the end-user, this will be completely transparent.
+EncFS [@encfs] is a command-line tool which takes two arguments, a `RootDirectory` and a `MountDirectory`. When run, it will create a new mount point at the `MountDirectory`. Any writes to this directory, such as creating a new file, will be intercepted, encrypted, and store in its encrypted form in `RootDirectory`. Whenever a file is read, it will first be decrypted and then returned. For the end-user, this will be completely transparent.
 
 ![EncFS encryption flow \label{6_2_0_1}](source/figures/6_2_0_1.png)
 

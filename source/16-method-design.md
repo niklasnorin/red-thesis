@@ -54,7 +54,7 @@ In practice, this would only work for very naïve, simple, applications and in v
 
 For the Stopwatch Example Application, manually creating one file per 7-segment display LED might be able to trick the application to simply write out the segment LED values to these files. Since writes to GPIOlib GPIO outputs are done via regular writes, this would simply truncate the file with a new value every time a LED changed value.
 
-For the buttons however this approach will not work. The Stopwatch Example Application depends on interrupts for the two buttons, and there is simply no way to "press" a button with this approach that will result in a GPIOlib compatible interrupt. The closest thing to file-based interrupts would be to listen to changes to a file using the `inotify` API, which is part of the Linux kernel [[#Linux Programmer's Manual, Michael Kerrisk - Linux man-pages maintainer, 2018-04-02](http://man7.org/linux/man-pages/man7/inotify.7.html)]. According to the documentation of `inotify` however, it can only intercept changes to files done via the filesystem API. Notably, it explicitly states that "pseudo-filesystems such as /proc, /sys, and /dev/pts are not possible to monitor with inotify". This means that the `inotify` API could not both be used to listen for changes in GPIO input value on both real hardware and on the target hardware.
+For the buttons however this approach will not work. The Stopwatch Example Application depends on interrupts for the two buttons, and there is simply no way to "press" a button with this approach that will result in a GPIOlib compatible interrupt. The closest thing to file-based interrupts would be to listen to changes to a file using the `inotify` API, which is part of the Linux kernel [@inotify]. According to the documentation of `inotify` however, it can only intercept changes to files done via the filesystem API. Notably, it explicitly states that "pseudo-filesystems such as /proc, /sys, and /dev/pts are not possible to monitor with inotify". This means that the `inotify` API could not both be used to listen for changes in GPIO input value on both real hardware and on the target hardware.
 
 Using `inotify` when running on a PC and e.g. `poll` (which works on SysFS files) on the real hardware would go against the HAL principle, and break both **R1** and **R2**, since it would mean the application would need to be changed to run on a PC.
 
@@ -64,7 +64,7 @@ This approach only works for dynamically linked applications by design, and so b
 ### Linux Kernel Driver
 Creating a custom Linux kernel driver offers many different options.
 
-Requirement **R11** prohibits running the entirety of Quarterdock itself inside the kernel, as a bug in Quarterdock would risk a "kernel panic" which in turn could bring down the whole system [[#Kernel Panic](?)].
+Requirement **R11** prohibits running the entirety of Quarterdock itself inside the kernel, as a bug in Quarterdock would risk a "kernel panic" which in turn could bring down the whole system [@kerneldebug].
 
 ### FUSE
 FUSE can be used, as is, to implement a filesystem to replace SysFS' GPIOlib without writing any Kernel space code.

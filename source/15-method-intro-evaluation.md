@@ -10,8 +10,6 @@ The method that will be used to develop this architecture is to:
 3. Implement the architecture
 4. Test the architecture with the Example Software
 
-If the Example Software is considered a test, then this is similar to a Test Driven Development, TDD, approach [#].
-
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used instead.
 

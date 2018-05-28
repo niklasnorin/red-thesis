@@ -50,8 +50,8 @@ One downsides of this solution is that it only works if you have a stable and re
 With regards to instrumentation and local access for testing etc. this method has the same pros and cons as the remote target solution.
 
 ## Cloud Development Environment
-Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available [#Cloud9 IDE](?).
+Online word processors, such as Google Documents, have been available for a while. Lately, mainly in web programming, whole online development environment are now available [@cloud9].
 
 Working completely through a webpage, with backing services, has the benefit of not having to set up anything on the local machine. The IDE and debugger is part of the webpage and compilation can be done on the server side of the solution, potentially using extremely powerful and scalable infrastructure.
 
-One downside to this is that there is not a lot of widespread adopted browser support to communicate directly with hardware, most likely due to security concerns. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed. However, there are some initiatives to overcome this, for example, be able to use USB devices from the browser [#USB in browser](?).
+One downside to this is that there is not a lot of widespread adopted browser support to communicate directly with hardware, most likely due to security concerns. Because of this, development environments that does connect to hardware often comes with some kind of plugin or client software that also needs to be installed. However, there are some initiatives to overcome this, for example, be able to use USB devices from the browser [@webusb].
