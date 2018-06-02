@@ -1,5 +1,5 @@
 # Designing Quarterdock
-The main goal of Quarterdock is to create an environment where an application targeting an embedded Linux application can run without modification.
+The main goal of Quarterdock is to create an environment where an application targeting an embedded Linux application can run without modification, as illustrated in Figure \ref{9}.
 
 ![Quarterdock's interfaces \label{9}](source/figures/9.png)
 

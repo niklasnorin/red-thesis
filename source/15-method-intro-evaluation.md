@@ -13,13 +13,13 @@ The method that will be used to develop this architecture is to:
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, the name Quarterdock will be used instead.
 
-![Quarterdock overview \label{8_1}](source/figures/8_1.png)
-
 Applications which uses Quarterdock is a Quarterdock Client.
 
 The embedded software application which is intended to run on an embedded target, and should also be able to run on Quarterdock, will be called the Target Application. When running in Quarterdock, the Target Application is a Quarterdock Client.
 
-The software application which emulates the hardware for a Target Application is an Emulated Hardware Application. An Emulated Hardware Application is also a Quarterdock Client.
+The software application which emulates the hardware for a Target Application is an Emulated Hardware Application. An Emulated Hardware Application is also a Quarterdock Client. All this is illustrated in Figure \ref{8_1}.
+
+![Quarterdock overview \label{8_1}](source/figures/8_1.png)
 
 ## Evaluate Architecture
 To evaluate this software architecture, and to give a concrete target for requirements, an Example Application will be implemented. This application will expect certain hardware GPIO:s to be available to it to function, and will exercise them.
@@ -36,7 +36,7 @@ The Example Application will set up and access GPIO:s. It will setup both inputs
 The Emulated Hardware Application will stimulate the Example Application's inputs and listen to its outputs. It will do this in a way that makes it possible for the developer to interact with inputs, and see graphical representations of the outputs. It is most likely written specifically for a concrete Example Application, but it could also be more generic.
 
 ### Stopwatch
-The concrete Example Application that will be used to evaluate the software architecture is a "stopwatch" application.
+The concrete Example Application that will be used to evaluate the software architecture is a "stopwatch" application, shown in Figure \ref{8_2_1}.
 
 ![The Stopwatch Quarterdock application \label{8_2_1}](source/figures/8_2_1.png)
 

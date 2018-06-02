@@ -1,13 +1,13 @@
 # Appendix A - Evaluation Software Implementation
 
-The Stopwatch Example produces as part of this thesis consisted of two parts:
+The Stopwatch Example produces as part of this thesis consisted of two parts, as illustrated in Figure \ref{a_1}. These are:
 
 1. The Stopwatch Application itself
 2. The Emulated Hardware Application which emulates the buttons and he 7-segment displays
 
-The example was written in Python using python-periphery [@python-periphery] for convenience, instead of using direct file writes.
-
 ![The Stopwatch Example \label{a_1}](source/figures/appendix_a_1.png)
+
+The example was written in Python using python-periphery [@python-periphery] for convenience, instead of using direct file writes.
 
 ## Stopwatch Application
 The main application was implemented as a simple single-file python application that:
@@ -17,7 +17,7 @@ The main application was implemented as a simple single-file python application 
 3. For every time the count changes, it updates all the output GPIO's controlling the 7-segment displays representing the count
 
 ## Stopwatch Emulated Hardware Application
-The application which emulates the connected hardware. It both handles the GPIO interface, and has a web-server which the user connects to when he wants to control the stopwatch.
+The application which emulates the connected hardware. It both handles the GPIO interface, and has a web-server which the user connects to when he wants to control the stopwatch, as shown in Figure \ref{a_2}.
 
 ![Starting and stopping the stopwatch \label{a_2}](source/figures/appendix_a_2.png)
 

@@ -19,7 +19,7 @@ Specifically for embedded software, some other nice properties include:
 In Linux, everything is either a file or a process [@linux-file-process]. Although a file in linux indeed often represents data that is persisted to disk, the filesystem is also used as a way to interact with kernel drivers.
 
 ## Kernel space and User space
-The memory space in Linux is divided between Kernel space and User space. Kernel space is where the kernel processes executes, while User space is where all other programs and services run [@linux-kernel-space].
+The memory space in Linux is divided between Kernel space and User space, as shown in Figure \ref{5_2}. Kernel space is where the kernel processes executes, while User space is where all other programs and services run [@linux-kernel-space].
 
 ![User space and Kernel Space \label{5_2}](source/figures/5_2.png)
 
@@ -28,7 +28,7 @@ The notion of Kernel space and User space is also used to refer to the amount of
 ## SysFS and GPIOlib for User Space GPIO Access
 While all direct hardware access is restricted to the kernel in Linux, SysFS is a generic Linux kernel facility that enables other kernel modules to expose data structures as attributes in the file system [@sysfs] at subdirectories of `/sys`.
 
-GPIOlib is such a kernel module, built on top of SysFS, and specifies an API to expose and interact with individual GPIO's as files [@gpiolib].
+GPIOlib is such a kernel module, built on top of SysFS and shown in Figure \ref{5_3} and specifies an API to expose and interact with individual GPIO's as files [@gpiolib].
 
 ![SysFS and GPIOlib \label{5_3}](source/figures/5_3.png)
 

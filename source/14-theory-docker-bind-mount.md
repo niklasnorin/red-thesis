@@ -1,6 +1,6 @@
 # Docker
 
-Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [[?Docker for the Virtualization Admin, Docker, 2018-03-25](https://goto.docker.com/virtualization-admin-conf.html)]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated.
+Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [[?Docker for the Virtualization Admin, Docker, 2018-03-25](https://goto.docker.com/virtualization-admin-conf.html)]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated. An overview of the entire architecture is shown in Figure \ref{7}.
 
 ![Docker architecture overview \label{7}](source/figures/7.png)
 
@@ -25,7 +25,7 @@ A Docker Container is an instance of a Docker Image running in the Docker daemon
 Docker provides a unified way to share data with Docker Containers. This includes both sharing data between multiple containers as well as sharing data between a container and the Host OS.
 
 ### Bind mounts
-Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [@docker-bind-mount]. Bind mounts work by mounting a replica of the _source folder_ into a _target folder_. Any changes done in either folder will be replicated in the other.
+Bind mounts are commonly used in Docker to share resources from the host OS to the Docker container [@docker-bind-mount]. Bind mounts work by mounting a replica of the _source folder_ into a _target folder_. Any changes done in either folder will be replicated in the other. An illustration on how this relates to the Docker architecture can be seen in Figure \ref{7_4_1}.
 
 ![Bind mount \label{7_4_1}](source/figures/7_4_1.png)
 

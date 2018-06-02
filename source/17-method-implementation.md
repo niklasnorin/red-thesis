@@ -6,6 +6,8 @@ Quarterdock consists of a few moving parts:
 3. The Quarterdock control layer to configure and setup 1. and 2.
 4. A Docker template for Quarterdock Clients that overrides the default GPIOlib with Quarterdock
 
+The relation between these are shown in Figure \ref{10}.
+
 ![Quarterdock and FUSE \label{10}](source/figures/10.png)
 
 ## GPIOlib Compatible FUSE Client
@@ -45,9 +47,9 @@ Early in the implementation of Quarterdock, `go-fuse` was "forked" from the main
 ### RpcFS
 The `go-fuse` API for a filesystem, and files in that filesystem, is quite extensive. The `FileSystem` interface contains 20+ functions and the `File` interface 10+ function any of which might, or might not, need to be implemented.
 
-![RpcFS - from file write to function call \label{10_1_5}](source/figures/10_1_5.png)
+A abstraction layer was developed to better separate the challenges related to interfacing with FUSE and those of emulating GPIO:s. That abstraction layer is called `RpcFS`, for Remote Procedural Call FileSystem, and an overview is shown in Figure \ref{10_1_5}.
 
-A abstraction layer was developed to better separate the challenges related to interfacing with FUSE and those of emulating GPIO:s. That abstraction layer is called `RpcFS`, for Remote Procedural Call FileSystem.
+![RpcFS - from file write to function call \label{10_1_5}](source/figures/10_1_5.png)
 
 The idea behind `RpcFS` is that each file is a simple object, called a `RpcFunction`. A `RpcFunction` is identified uniquely by its path, such as `/gpio1/value`, and can implement 3 functions:
 
@@ -72,7 +74,7 @@ This assumption does not hold true for input GPIO:s, which can change at any poi
 `RpcFS` makes sure files are opened with the `O_DIRECT` option to bypass the default page cache.  With `O_DIRECT` enabled, each `read` or `write` operation is always guaranteed to trigger a read or write to the underlying filesystem.
 
 ### GpioFS
-While `RpcFS` is used to setup and interface with FUSE, `GpioFS` only concerns itself with exposing the GPIOlib interface. `GpioFS` does in fact not have any dependencies on `go-fuse` but only on `RpcFS`.
+While `RpcFS` is used to setup and interface with FUSE, `GpioFS` only concerns itself with exposing the GPIOlib interface. `GpioFS` does in fact not have any dependencies on `go-fuse` but only on `RpcFS`, as shown in Figure \ref{10_1_6}.
 
 ![GpioFS implemented on top of RpcFS \label{10_1_6}](source/figures/10_1_6.png)
 
@@ -136,7 +138,7 @@ All other GPIO files, `/direction` and `/edge`, are prefixed with the `GpioFS`'s
 Although not directly related, please note again that the exported pins are local to the `GpioFS` instance. Which pins are exported (and so visible in the filesystem) are not shared between `GpioFS` instances, even if the `MemDB` is shared.
 
 ### Quarterdock
-While `GpioFS` provides the GPIOlib FUSE implementation and `MemDB` the storage, it is the Quarterdock CLI, Command Line Interface, which provides an interface to the user. In addition to this, it is also the part of the application which composes a complete working system out of these components.
+While `GpioFS` provides the GPIOlib FUSE implementation and `MemDB` the storage, it is the Quarterdock CLI, Command Line Interface, which provides an interface to the user. In addition to this, it is also the part of the application which composes a complete working system out of these components. Figure \ref{10_1_7} shows an example run.
 
 ![A Quarterdock instance given two paths - one for the Target Application and one for the Emulated Hardware Application \label{10_1_7}](source/figures/10_1_7.png)
 
@@ -156,7 +158,7 @@ There are at least two reasons why we would not want Quarterdock to mount direct
 Instead, we want to find a solution where the GPIOlib compatible mounts are exposed to the Target Application and the Emulated Hardware Application separately and at the same location, `sys/class/gpio`.
 
 ### Docker Container and Bind Mount
-To be able to expose the two different applications, the Target Application and the Emulated Hardware Application, to two different environment we will use a combination of Docker containers and bind mounts.
+To be able to expose the two different applications, the Target Application and the Emulated Hardware Application, to two different environment we will use a combination of Docker containers and bind mounts, as illustrated in Figure \ref{10_2_1}.
 
 ![Bind mounting two different GPIOlib folders into the same location, `/sys/class/gpio`, in the two containers \label{10_2_1}](source/figures/10_2_1.png)
 
@@ -195,7 +197,7 @@ A complete Quarterdock Environment consists of a minimum of three Docker contain
 2. The Target Application (Quarterdock Client)
 3. The Emulated Hardware Application (Quarterdock Client)
 
-This constellation of containers is composed using Docker Compose. This allows us to configure the entire environment so that it can be replicated every time.
+This constellation of containers is composed using Docker Compose. This allows us to configure the entire environment so that it can be replicated every time, as shown in Figure \ref{10_3}.
 
 ![Creating and running a complete Quarterdock environment from a single configuration file \label{10_3}](source/figures/10_3.png)
 

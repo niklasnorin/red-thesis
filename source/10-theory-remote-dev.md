@@ -8,7 +8,7 @@ In many cases, taking the system to-go simply not an option because of size of t
 
 ![Different embedded software development setups \label{3}](source/figures/3.png)
 
-There are several solutions to working with most embedded software development remotely. For reference, we will first talk about working in a local environment.
+There are several solutions to working with most embedded software development remotely, as illustrated in Figure \ref{3}. For reference, we will first talk about working in a local environment.
 
 ## Local Development - Local Target
 The most common embedded development setup is to have a PC, a desktop or laptop, connected to the embedded target directly via cables. In addition to this, any instrumentation, connectivity or power needed can be connected directly to the boards making up the setup.
