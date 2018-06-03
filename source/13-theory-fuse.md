@@ -6,7 +6,7 @@ The power of FUSE lies in that it enables the creation of custom filesystems wit
 
 ![Regular filesystem access \label{6_0_1}](source/figures/6_0_1.png)
 
-FUSE consists of two parts: a kernel driver and a User space FUSE client which talks to the kernel driver. The way it works is that a client filesystem, running in User space, asks the FUSE kernel module to mount a new filesystem. Any file operations directed at that mount point, such as trying to list the content of a directly, is then forwarded to the client filesystem. The client filesystem can then handle these requests in any way it wants. The access of a FUSE filesystem is illustrated in Figure \ref{6_0_2}.
+FUSE consists of two parts: a kernel driver and a User space FUSE client which talks to the kernel driver. The way it works is that a client filesystem, running in User space, asks the FUSE kernel module to mount a new filesystem. Any file operations directed at that mount point, such as trying to list the content of a directory, is then forwarded to the client filesystem. The client filesystem can then handle these requests in any way it wants. The access of a FUSE filesystem is illustrated in Figure \ref{6_0_2}.
 
 ![Accessing a FUSE filesystem \label{6_0_2}](source/figures/6_0_2.png)
 
@@ -16,7 +16,7 @@ FUSE has been a part of mainstream Linux since Linux Kernel version 2.6.14, rele
 A mounted FUSE filesystem is normally only available to the user that mounted the filesystem. This can be overridden to extend to all users with a configuration option.
 
 ## Example: Encrypted filesystem
-How FUSE works, and how it could be useful, could easily be illustrated with EncFS.
+How FUSE works, and how it could be useful, can easily be illustrated with EncFS.
 
 EncFS [@encfs] is a command-line tool which takes two arguments, a `RootDirectory` and a `MountDirectory`. When run, it will create a new mount point at the `MountDirectory`. 
 

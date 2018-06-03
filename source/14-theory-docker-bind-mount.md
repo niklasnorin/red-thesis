@@ -1,6 +1,6 @@
 # Docker
 
-Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [[?Docker for the Virtualization Admin, Docker, 2018-03-25](https://goto.docker.com/virtualization-admin-conf.html)]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated. An overview of the entire architecture is shown in Figure \ref{7}.
+Docker is a container platform that allows multiple software applications to run in isolation on the same Host OS [@docker-virtual]. This is similar to Virtual Machine, VM, technology, but in contrast to running multiple VM:s on one physical computer, the kernel is not duplicated. An overview of the entire architecture is shown in Figure \ref{7}.
 
 ![Docker architecture overview \label{7}](source/figures/7.png)
 
@@ -9,7 +9,7 @@ Docker uses the analogy of houses vs. apartments. With a VM, you get a house wit
 While a VM uses virtualization of the hardware and contain the entire Operating System, Docker is an application delivery technology.
 
 ## Docker Daemon and Client
-Docker consists of a daemon and a client [[?Docker Architecture, 2018-03-25](https://docs.docker.com/engine/docker-overview/#docker-architecture)]. The client is used to control the daemon, while the daemon does all the heavy lifting. The daemon can be running on the same system as the client, or it could be on a remote system.
+Docker consists of a daemon, a background process, and a client [@docker-overview]. The client is used to control the daemon, while the daemon does all the heavy lifting. The daemon can be running on the same system as the client, or it could be on a remote system.
 
 The end-user would use the client for most operations. All commonly used Docker operations, such as building a Docker Image or running a Docker Container, are run via the client which in turn instructs the daemon what to do.
 
@@ -37,7 +37,7 @@ Please note that the folder must exist, or be possible to create, to be the targ
 The way sub-mounts, mounts inside the source or target folder, works depends on what is known as bind propagation. Depending on the bind propagation setting, mounts inside either folder can be private (`private`/`rprivate`), shared one way (`slave`/`rslave`) or shared both ways (`shared`/`rshared`). This can also be applied to only those folders, or recursively (the `r` in `rshared`) to any mount inside those bind mounts.
 
 ## Access to Hardware
-Typically, Docker Containers do not have access to hardware because they are not run as a super user [@privileged]. This means that it does not have the elevated access needed to do most system calls to the kernel. The upside of this is that it minimizes the risk that one container affects the environment of another container.
+Typically, Docker Containers do not have access to hardware because they are not run as a super user [@docker-privileged-mode]. This means that it does not have the elevated access needed to do most system calls to the kernel. The upside of this is that it minimizes the risk that one container affects the environment of another container.
 
 To be able to access hardware, the Docker Container either has to be run in privileged mode, granting it system wide super user access, or be explicitly granted access on a device-by-device level.
 

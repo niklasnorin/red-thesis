@@ -2,9 +2,9 @@
 
 In many cases it is not possible to execute the embedded software being developed on the computer used for the development. This is due to differences in processor architecture and hardware between most computers and the embedded target.
 
-Most modern personal computers have either x86 or amd64 based processors, while most modern embedded systems have ARM based processors. There are emulators that can execute non-native code, such as running ARM programs on a x86 system, but it's very rare that these emulators supports emulating all attached hardware peripherals.
+Most modern personal computers have either x86 or amd64 based processors, while most modern embedded systems have ARM based processors. There are emulators that can execute non-native code, such as running ARM programs on a x86 system, but it's very rare that these emulators support emulating all attached hardware peripherals.
 
-It's also highly likely that the target will be using special hardware that is not available on the developers computer, such as LEDs and buttons.
+It's also highly likely that the target will be using special hardware that is not available on the developer's computer, such as LEDs and buttons.
 
 ## Emulated Hardware
 An embedded application is designed to run in a very specialized environment, with a very specific purpose and often with far reaching dependencies on services available only in the environment that the software is designed to run in. 
@@ -17,9 +17,9 @@ Replicating the target environment tends to be harder for embedded software. Emu
 
 The reason the environment in which embedded software runs is generally harder to emulate is two-fold.
 
-Firstly, embedded code often depends heavily on hardware peripherals on the processor executing the code. This can be very hard to emulate, as access to these facilities are often done on a very low abstraction level, the behavior is complex and implemented in closed-source hardware. 
+First, embedded code often depends heavily on hardware peripherals on the processor executing the code. This can be very hard to emulate, as access to these facilities are often done on a very low abstraction level, the behavior is complex and implemented in closed-source hardware. 
 
-Secondly, embedded code often depends on externally connected components, like buttons or displays connected via inputs, outputs or serial protocols. These interactions are often hard to emulate and there are few standard ways of emulating, nor stimulating, these component together with application code.
+Secondly, embedded code often depends on externally connected components, like buttons or displays connected via inputs, outputs or serial protocols. These interactions are often hard to emulate and there are few standard ways of emulating, or stimulating, these component together with application code.
 
 ## Full system emulation
 There are emulators, such as QEMU [@qemu] or VirtualBox [@virtualbox], that are considered full-system emulators. What this means is that the emulator can emulate the architecture and the environment needed to run both the OS and the application that is targeting another target than the host.
