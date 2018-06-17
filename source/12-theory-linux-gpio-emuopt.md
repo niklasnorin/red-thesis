@@ -2,7 +2,7 @@
 
 The use of Linux in embedded applications is on the rise [@linux-growing].
 
-Linux as an OS which is [@linux]:
+Linux is an OS which is [@linux]:
 
 - Free, with no royalties or licensing fees
 - Very thoroughly tested, at scale, for more than 25 years
@@ -16,7 +16,7 @@ Specifically for embedded software, some other nice properties include:
 
 ## Everything is a File or a Process
 
-In Linux, everything is either a file or a process [@linux-file-process]. Although a file in linux indeed often represents data that is persisted to disk, the filesystem is also used as a way to interact with kernel drivers.
+In Linux, everything is either a file or a process [@linux-file-process]. Although a file in Linux indeed often represents data that is persisted to disk, the filesystem is also used as a way to interact with kernel drivers.
 
 ## Kernel space and User space
 The memory space in Linux is divided between Kernel space and User space, as shown in Figure \ref{5_2}. Kernel space is where the kernel processes executes, while User space is where all other programs and services run [@linux-kernel-space].
@@ -54,7 +54,7 @@ If the GPIO is an output, then writing a `1` to it will set the output to logic 
 If the GPIO is configured as an input, then reading `/value` will return the current state of the GPIO.
 
 ### Listening to Interrupts
-Many input pins support listening to interrupts. This functionality is configured via the `/edge` file. This attribute can be set to `falling` to trigger on falling edge, `raising` to trigger on raising edge or `both` to trigger on both. Setting it to `none` disables interrupt detection.
+Many input pins support listening to interrupts. This functionality is configured via the `/edge` file. This attribute can be set to `falling` to trigger on falling edge, `rising` to trigger on raising edge or `both` to trigger on both. Setting it to `none` disables interrupt detection.
 
 The configuration above only enables the underlying interrupt. Listening on the file itself is done via Linux `poll`, which is a command that can be used to wait on arbitrary files. When `poll` is used on `/value` and it returns an event, it means that an interrupt has been triggered and there has been a change in the underlying value.
 
@@ -62,7 +62,7 @@ The configuration above only enables the underlying interrupt. Listening on the 
 There are multiple ways to emulate hardware, or trick an application to think that hardware is available. These range from simply creating a few empty files to creating low-level kernel drivers.
 
 ### Duplicating SysFS with Regular Files
-Because everything is a file in Linux, standard `read` or `write` operations are used and for many operations these cannot distinguish a regular persistent file from a file that is mapped to hardware. This means that by replicating the GPIOlib file structure with regular persistent files is possible in some cases.
+Because everything is a file in Linux, standard `read` or `write` operations are used and for many operations these cannot distinguish a regular persistent file from a file that is mapped to hardware.
 
 Linux also contains an API for listening for changes in files called `inotify` [@inotify]. This can be used to listen to if there is new data available to read or if it is possible to write to a file.
 

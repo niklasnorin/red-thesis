@@ -1,4 +1,4 @@
-# Software Development
+# Software Development Workflow
 
 The way software is developed varies depending on if the application is intended to run natively on the developer's PC or if it is targeted to run on an embedded device.
 
@@ -32,9 +32,9 @@ The workflow is similar:
 
 Most modern laptops and desktops run on a x86 architecture [@ee-time-x86-marketshare] while modern embedded systems often run on an ARM processor architecture. Instead of using a traditional compiler, a cross-architecture compiler (or cross-compiler for short) is used to build and link a non-native application which can be executed on the target platform, but typically not on the local computer [@cross-compile].
 
-When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection can then used to control the execution of the software on the target.
+When working with embedded software, the hardware which is intended to run the software is often referred to explicitly as the *target*. Once an executable has been built, it has to be moved to the target before being executed. This is typically done via a memory card, serial link or network connection to the target. This same connection can then be used to control the execution of the software on the target.
 
-Working with another target than the local computer has far reaching implications on the development workflow. Debugging embedded software is also generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, For example GDB, The GNU Project Debugger, makes it possible to set up a remote debugging server on the target to which GDB connects [@gdb]. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
+Working with another target than the local computer has far reaching implications on the development workflow. Debugging embedded software is also generally a bit harder to set up than debugging native applications, but very similar once set up correctly. For traditional debugging, which includes setting breakpoints and inspect variables, most embedded development environments come with a way of setting up a remote debug target. GDB, for example, the GNU Project Debugger, makes it possible to set up a remote debugging server on the target to which GDB connects [@gdb]. Once connected, GDB can be used in the same way as if developing a native application, often with full IDE, Integrated Desktop Environment, support for setting per-line breakpoints and inspecting memory.
 
 ### Hardware Abstraction Layer
 When working with embedded software, having some sort of Hardware Abstraction Layer, or HAL, can make the developer's life easier. The main idea with a HAL is to decouple the application facing hardware interfaces from the actual hardware [@hal]. It makes it possible to run the same code on several platforms without having to worry about the underlying hardware being different. This is illustrated in Figure \ref{2_2_1}.

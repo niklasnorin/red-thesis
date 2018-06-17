@@ -1,4 +1,12 @@
-# Discussion
+# Conclusion and Discussion
+
+This thesis has shown that it is possible to create an artificial environment where an embedded software application can interact with GPIO hardware via the SysFS GPIOlib API as if they were present. Using this artificial environment, a developer can develop and test embedded software applications that rely on GPIO interactions on a regular PC, without having access to the physical Target device. The embedded software application can do this, and then be run without modification on the Target device.
+
+Furthermore, this thesis has also shown that, using this same core architecture, it is possible to create an application which emulates the behavior of the "other end", or the external electronics. Using this architecture, it is possible to give output GPIOs a rich representation as well as exposing inputs in such a way that they can be stimulated in the same way as physical GPIOs, and more.
+
+Both the application environment and the emulated hardware environment of Quarterdock are shown in Figure \ref{11}.
+
+![Quarterdock \label{11}](source/figures/11.png)
 
 The work presented in this thesis is very relevant given the existing popularity, and the rising trend, of embedded devices running Linux. Quarterdock enables developers to run embedded software that uses GPIOs on their local PC, without having to have an attached Target device.
 
@@ -14,7 +22,7 @@ The solution presented in this thesis is just a stepping stone. Using FUSE to em
 Below follows some known limitations and suggestions for future improvement or work.
 
 ### Fulfilling the Entire GPIOLib Interface
-Currently, `GpioFS` does not support unexporting exported GPIOs, nor does it support the `active_low` GPIO primitive. There is also very few sanity checks on the existing functionality.
+Currently, `GpioFS` does not support unexporting exported GPIOs, nor does it support the `active_low` GPIO primitive.
 
 In addition to this, the error messages and return codes produced by `GpioFS` have not been compared to that of GPIOlib. Since this should be considered part of the API, it needs to be implemented if errors are to be handled the same on real hardware as on Quarterdock.
 
@@ -35,7 +43,7 @@ Adding the possibility to map the pins of the Target Application to any other pi
 ### GPIOLib on Linux PC
 Because the `boot2docker` Virtualbox image used did not have GPIOlib support, and so no `/sys/class/gpio` folder, it was not possible to mount a `GpioFS` instance directly to it. To work around this, the whole `/sys/class` folder was bind-mounted. This in turn means all access to other `/sys/class` resources, except `GpioFS` in the Quarterdock Client, are essentially blocked.
 
-This could potentially be fixed by creating a empty SysFS kernel module which exposes something in `/sys/class/gpio`. It doesn't matter what the content would be, since it is only the folder itself that would be used when bind mounting.
+This could potentially be fixed by creating an empty SysFS kernel module which exposes something in `/sys/class/gpio`. It doesn't matter what the content would be, since it is only the folder itself that would be used when bind mounting.
 
 Note that if Quarterdock is used on a embedded Target device, then bind mounting directly to `/sys/class/gpio` is possible, since it would include GPIOlib support.
 
@@ -66,7 +74,7 @@ Instead of using FUSE, it could be possible to create a native SysFS module whic
 2. Support mapping the GPIOs in these folders to each other
 3. Support "GPIO passthrough" to write to the real GPIOs
 
-This module would be exposed not in `/sys/class/gpio`, but for example in `/sys/class/gpio-emu`, to not clash with GPIOlib. The later could still be exposed to the application at `/sys/class/gpio` using the same bind-mounting in Docker technique that was used with Quarterdock.
+This module would be exposed not in `/sys/class/gpio`, but for example in `/sys/class/gpio-emu`, to not clash with GPIOlib. The later could still be exposed to the application at `/sys/class/gpio` using the same bind-mounting technique that was used with Quarterdock.
 
 This would probably be faster than FUSE. However, it would require the the development of a custom kernel module. Also, if any decisions or routing should be dynamically configurable in User space, then it would still require a Kernel module to User space interface, something that FUSE already provides as part of its implementation.
 

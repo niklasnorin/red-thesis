@@ -8,12 +8,14 @@ This means that, in this environment, the application will find that interacting
 ## Requirements
 There are several requirements needed to support this kind of architecture. This section will outline some of the most important ones.
 
+All the requirements are written to further specify and clarify how the Purpose and Goals of this work relates to the concrete implementation of the architecture.
+
 ### Core Requirements
 The Target Application should be able to interact with GPIOs as if they were physically there. This means that Quarterdock shall:
 
 **R1.** Emulate GPIO hardware in a way transparent to the Target Application.
 
-**R2.** Be able to stimulate the peripheral side of emulated inputs and outputs from a Emulated Hardware Application. This application should be possible to implement as if it was running on the Target, with the same requirement of transparency as **R1**.
+**R2.** Be able to stimulate the peripheral side of emulated inputs and outputs from an Emulated Hardware Application. This application should be possible to implement as if it was running on the Target, with the same requirement of transparency as **R1**.
 
 The first requirement is very important for the Target Application to be able to interact with the hardware drivers without any modification. This means that all interfaces need to be the same as the real hardware, as well as the data passed both ways over those interfaces.
 
@@ -34,15 +36,9 @@ In addition to the above, Quarterdock shall also:
 
 **R8.** Enable the developer to write the Emulated Hardware Application in a way that accesses hardware in the same way as the Target Application. This allows the developer to write emulated hardware code using the exact same language and libraries that he is already using to write his application.
 
-**R9.** Be possible to run Quarterdock on real hardware.
+**R9.** Quarterdock shall be run in such a way that a bug does not bring down the entire Host OS.
 
-**R10.** Be possible for Quarterdock to both intercept and forward writes to GPIOs to the real GPIOs when run on real hardware.
-
-**R11.** Quarterdock shall be run in such a way that a bug does not bring back the entire target.
-
-**R12.** Quarterdock should only intercept GPIO calls from the Quarterdock Client, not the entire system.
-
-These last two features combined enables intercepting GPIO access on the real hardware while still operating normally. This in turn can be used to develop virtual logical analyzers that can be run on real hardware.
+**R10.** Quarterdock should only intercept GPIO calls from the Quarterdock Client, not the entire system.
 
 ## Selecting Option for Emulating GPIO
 As was outlined previously there are multiple options for intercepting calls to GPIOs in Linux. Each comes with their own pros and cons and differ vastly in when, and how, they intercept calls to hardware. 
@@ -64,12 +60,12 @@ This approach only works for dynamically linked applications by design, and so b
 ### Linux Kernel Driver
 Creating a custom Linux kernel driver offers several different options.
 
-Requirement **R11** prohibits running the entirety of Quarterdock itself inside the kernel, as a bug in Quarterdock would risk a "kernel panic" which in turn could bring down the whole system [@kerneldebug].
+Requirement **R9** prohibits running the entirety of Quarterdock itself inside the kernel, as a bug in Quarterdock would risk a "kernel panic" which in turn could bring down the whole system [@kerneldebug].
 
 ### FUSE
 FUSE can be used as is to implement a filesystem to replace SysFS' GPIOlib without writing any Kernel space code.
 
-While FUSE runs partially in Kernel space, which could hint at breaking **R11**, the actual file system logic runs completely in User space. Even though a bug in the FUSE Kernel module could result in a Kernel Panic, the kernel module is used by many different project and is quite proven.
+While FUSE runs partially in Kernel space, which could hint at breaking **R9**, the actual file system logic runs completely in User space. Even though a bug in the FUSE Kernel module could result in a Kernel Panic, the kernel module is used by many different project and is quite proven.
 
 FUSE can intercept all filesystem calls to a certain mounted volume. As long as we replicate the files and folder structure of GPIOlib, this means that it will work independent of how the filesystem call was made. It doesn't matter if the calling application is statically linked or dynamically linked and it works for all calls, including `poll`, since it intercepts the calls on a filesystem level.
 

@@ -47,7 +47,7 @@ Early in the implementation of Quarterdock, `go-fuse` was modified from the main
 `go-fuse` already has a lot of the infrastructure in place for this. All filesystem operations are handled in a very similar way. Most of the work related to adding polling has to do with learning exactly how `go-fuse` works, and adding it in a idiomatic manner.
 
 ### RpcFS
-The `go-fuse` API for a filesystem, and files in that filesystem, is quite extensive. The `FileSystem` interface contains more than 20 functions and the `File` interface more than 10 function. Which of these functions need to be implemented or not depend on the requirements of the filesystem.
+The `go-fuse` API for a filesystem, and files in that filesystem, is quite extensive. The `FileSystem` interface contains more than 20 functions and the `File` interface more than 10 functions. Which of these functions need to be implemented or not depend on the requirements of the filesystem.
 
 An abstraction layer was developed to better separate the challenges related to interfacing with FUSE and those of emulating GPIOs. That abstraction layer is called `RpcFS`, for Remote Procedural Call FileSystem, and an overview is shown in Figure \ref{10_1_5}.
 
@@ -64,12 +64,12 @@ None of these functions are implemented by `RpcFS`, it only intercepts the under
 `RpcFS` also takes care of the logic related to setting up the mount volume, navigating through the folder structure created by the paths, returning fixed sizes for files and more.
 
 #### Fixed File Size
-To keep with the interface of SysFS, the size of all files are set to fixed size of 4096 bytes, or one i386 "page". This is done so that all data can be read and written by passing a single 4096 byte buffer [@sysfs]. This is also something `RpcFS` does without any special configuration.
+To keep with the interface of SysFS, the size of all files are set to fixed size of 4096 bytes, or one x86 "page". This is done so that all data can be read and written by passing a single 4096 byte buffer [@sysfs]. This is also something `RpcFS` does without any special configuration.
 
 When a client issues a `read`, what happens is that X amount of bytes is returned, and then the next call returns that it read zero bytes, a signal that there is no more data to be read.
 
 #### Bypassing the Page Cache
-When opening a file, the Kernel by default opens it in a buffered mode [@linux-open]. In this mode, Linux assumes that since a file cannot change in between a filesystem write and a read, it is free to cache any reads. This means that if you read a file twice, it might issue a read request to the filesystem the first time, but the second time it might return the a cached result of the first read.
+When opening a file, the Kernel by default opens it in a buffered mode [@linux-open]. In this mode, Linux assumes that since a file cannot change in between a filesystem write and a read, it is free to cache any reads. This means that if you read a file twice, it might issue a read request to the filesystem the first time, but the second time it might return the cached result of the first read.
 
 This assumption does not hold true for input GPIOs, which can change at any point in time. A first read might yield a `0` while the second read might yield a `1`, all depending on behavior external to the Kernel and the filesystem.
 
@@ -207,7 +207,7 @@ The Docker Compose setup is configured so that:
 
 1. The Quarterdock container starts and sets up two `GpioFS` mount points on the host
 2. When the Quarterdock container has started, both the other containers start
-3. The Target Application starts while being exposed to one of `GpioFS` mount points via one bind mount
+3. The Target Application starts while being exposed to one `GpioFS` mount point via one bind mount
 4. At the same time, the Emulated Hardware Application starts and is exposed to the other `GpioFS` mount point
 
 After this point, all of the Target Application GPIOs are connected to the GPIOs of the Emulated Hardware Application via Quarterdock.

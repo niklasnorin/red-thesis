@@ -9,29 +9,31 @@ Within the area of electrical engineering, embedded software development is a li
 
 The aim of this thesis is to define and, in part, implement, a suggestion for an architecture that would enable embedded software developers to remotely develop, debug and test real embedded software. This thesis will peer into existing work, look into the pros and cons of emulation versus real hardware, take a deep-dive into developing and debugging SW on a remote target and look into how to stimulate inputs and view outputs remotely. It will also take a look into attaching virtual tools to the target, such as logic analyzers or serial port emulators.
 
-The architecture itself will be developed with the latest advances in mind, in everything from scalable software containers to combined MCU-FPGA systems. The intention is to come up with an architecture that covers the most common use-cases of modern embedded software development as well as one that can scale from one remote developer to thousands.
+The architecture itself will be developed with the latest advances in mind. The intention is to come up with an architecture that covers the most common use-cases of modern embedded software development as well as one that can scale from one remote developer to thousands.
 
 ## Purpose
-Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kits and instruments connected to a PC, as shown in Figure \ref{1_2}.
+Working with embedded software development traditionally means having access to the physical hardware, often in the form of a development kit and instruments connected to a PC, as shown in Figure \ref{1_2}.
 
-This thesis sets out to design and, in part, implement a software architecture that enables embedded software developers to develop, debug and test embedded Linux software that accesses hardware, without access to physical hardware.
+This thesis sets out to design and, in part, implement a software architecture for an environment that enables embedded software developers to develop, debug and test embedded Linux software that accesses hardware, without access to physical hardware.
+
+The architecture should not put any unnecessary restrictions on both the embedded Linux software and the developers development environment or PC. It should also take measures to minimize the effect running the environment itself, and software running inside the environment, has on software running outside of it.
 
 ![Development without access to hardware \label{1_2}](source/figures/1_2.png)
 
 ## Goal
 Some of the questions that this thesis sets out to answer are:
 
-1. Is it possible to set up an environment on a PC which allows an embedded software developer to perform most development related tasks without access to the physical hardware?
+1. Is it possible to set up an environment on a PC which allows an embedded software developer to run software which uses GPIOs without access to the physical hardware?
 
-2. Is it possible to do this in such an unobtrusive way, so that the exact same program can be run on the real hardware target and in the emulation environment?
+2. Is it possible to do this in such an unobtrusive way that a program that uses GPIOs can not only be run without modification in this environment, but also expect to see the exact same interface as it would on real hardware?
 
-3. In such an environment, is it possible to represent outputs, and to stimulate inputs, to at least the same degree as with real hardware?
+3. In such an environment, is it possible to also represent outputs, and to stimulate inputs, of this program, programmatically, in such a way that simple external GPIO peripherals can me emulated?
 
 ## Limitation of Scope
 To be able to focus on the core innovative aspects of the work, this report sets some strong limitations on scope.
 
 ### Linux
-This thesis will only look into embedded software built on top of the Linux kernel. Namely, this excludes microcontrollers.
+This thesis will only look into embedded software built on top of the Linux kernel.
 
 ### Local Target
 The solution that this thesis sets out to design will focus on replacing local development, on a local target, on the developer's PC.
@@ -41,12 +43,12 @@ Working with remote targets is described in the theory part of the thesis, this 
 ### Processor Architecture
 Many embedded systems use the ARM architecture [@arm-roadshow-slides], while most computers used by developers are x86 [@ee-time-x86-marketshare]. This means that to run a compiled program targeting an ARM architecture on the developers PC, it either needs to be cross-compiled or run through an emulator.
 
-Because of time constraints, the evaluation software used to evaluate the architecture in this thesis uses a interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) parses and executes the code on the fly.
+Because of time constraints, the evaluation software used to evaluate the architecture in this work uses an interpreted programming language, instead of a compiled one. This works by having a piece of software called an interpreter (compiled specifically for each architecture) which parses and executes the code on the fly.
 
 This setup means that the exact same code can be executed both on a PC and on the target without any modification, without cross-compilation and without having to use an emulator.
 
 ### GPIO
-While the architecture developed in this work aim to be open ended with regards to possible hardware to emulate, the main focus will be on emulating both ends of GPIOs.
+While the architecture developed in this work aims to be open ended with regards to possible hardware to emulate, the main focus will be on emulating both ends of GPIOs.
 
 ### Digital Signals
-The instrumentation and hardware emulation in this thesis focus on digital emulation of signals and communication channels.
+The instrumentation and hardware emulation in this work focuses on digital emulation of signals and communication channels.

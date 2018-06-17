@@ -13,7 +13,7 @@ The method that will be used to develop this architecture is to:
 ## Nomenclature
 The Emulated Hardware Abstraction Layer developed in this thesis will be called Quarterdock. Instead of writing out Emulated Hardware Abstraction Layer, going forward the name Quarterdock will be used instead.
 
-Applications which uses Quarterdock is a Quarterdock Client.
+Applications which use Quarterdock is a Quarterdock Client.
 
 The embedded software application which is intended to run on an embedded target, as well as on Quarterdock, will be called the Target Application. When running in Quarterdock, the Target Application is a Quarterdock Client.
 

@@ -6,15 +6,13 @@ Docker is a container platform that allows multiple software applications to run
 
 Docker uses the analogy of houses vs. apartments. With a VM, you get a house with dedicated infrastructure. With Docker, you share the infrastructure, more like an apartment. This makes the operation and resources used by docker a lot smaller than those of a VM.
 
-While a VM uses virtualization of the hardware and contain the entire Operating System, Docker is an application delivery technology.
-
 ## Docker Daemon and Client
 Docker consists of a daemon, a background process, and a client [@docker-overview]. The client is used to control the daemon, while the daemon does all the heavy lifting. The daemon can be running on the same system as the client, or it could be on a remote system.
 
 The end-user would use the client for most operations. All commonly used Docker operations, such as building a Docker Image or running a Docker Container, are run via the client which in turn instructs the daemon what to do.
 
 ## Docker Images
-A Docker Image is a read-only layered template of dependencies needed to run a specific application. A Docker Image can be a whole Linux distribution, such as Debian. When running an application in a Debian Docker Image, the application can expect all of the facilities normally available in Debian.
+A Docker Image is a template of dependencies needed to run a specific application. A Docker Image can be a whole Linux distribution, such as Debian. When running an application in a Debian Docker Image, the application can expect all of the facilities normally available in Debian.
 
 The best practice in Docker however, is that the Docker Image contains only the minimum amount of dependencies needed to run an application. In many cases, this means that the image only consists of the exact libraries and runtimes needed to run that exact application.
 
@@ -44,7 +42,7 @@ To be able to access hardware, the Docker Container either has to be run in priv
 ## Docker Compose
 Since Docker containers are usually constructed to be isolated and self contained it is often necessary to run multiple Docker containers to perform a given task. For example, a simple web-server might consist of one Docker container running the actual web-server and another which only runs the database.
 
-While it is possible to manually start multiple Docker containers, Docker Compose offer a declarative configuration syntax of automating it. Using Docker Compose, each Docker container is simply a entry in a `docker-compose.yml`-file. There each container can be configured with the exact same parameters that would be available if they were started one by one.
+While it is possible to manually start multiple Docker containers, Docker Compose offer a declarative configuration syntax of automating it. Using Docker Compose, each Docker container is simply an entry in a `docker-compose.yml`-file. There each container can be configured with the exact same parameters that would be available if they were started one by one.
 
 ## Docker Machine
 Docker runs all containers on top of the same kernel. Docker containers can run on several different kernels natively. The latest versions of docker can run natively on top of both the Windows and OS X hypervisor in addition to the Linux kernel [@docker-machine-overview]. 
